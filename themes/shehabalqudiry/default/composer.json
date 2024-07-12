@@ -1,0 +1,20 @@
+{
+    "name": "shehabalqudiry/default",
+    "description": "Default theme to use in our solutions",
+    "type": "laravel-theme",
+    "version": "1.0",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Shehabalqudiry",
+            "email": "shehabalqudiry@gmail.com"
+        }
+    ],
+    "extra": {
+        "theme": {
+            "parent": "default-one",
+            "active": true,
+            "screenshot": "screenshot.png"
+        }
+    }
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b44b0e57d8151191f5552ee6d92d460",
+    "content-hash": "88c5d6793727f610087678ffa5abe0e3",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1358,6 +1358,174 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "hexadog/laravel-menus-manager",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexadog/laravel-menus-manager.git",
+                "reference": "06a69cf9773e3cb7dc3720597b5cfcafd2c611ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexadog/laravel-menus-manager/zipball/06a69cf9773e3cb7dc3720597b5cfcafd2c611ef",
+                "reference": "06a69cf9773e3cb7dc3720597b5cfcafd2c611ef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/view": "^7.0|^8.0|^9.0|^10.0|^11.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "orchestra/testbench": "~5.2|^7.1|^8.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hexadog\\MenusManager\\Providers\\PackageServiceProvider"
+                    ],
+                    "dont-discover": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hexadog\\MenusManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gaetan",
+                    "email": "gaetan@hexadog.com"
+                }
+            ],
+            "description": "Dynamic Menus Management package for your Laravel application",
+            "support": {
+                "issues": "https://github.com/hexadog/laravel-menus-manager/issues",
+                "source": "https://github.com/hexadog/laravel-menus-manager"
+            },
+            "time": "2024-03-26T13:30:18+00:00"
+        },
+        {
+            "name": "hexadog/laravel-theme-installer",
+            "version": "v1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexadog/laravel-theme-installer.git",
+                "reference": "ddfc151f59c33129dcb952d6dd46e826fdf8f16d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexadog/laravel-theme-installer/zipball/ddfc151f59c33129dcb952d6dd46e826fdf8f16d",
+                "reference": "ddfc151f59c33129dcb952d6dd46e826fdf8f16d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1|^2.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3|^2.6.4",
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Hexadog\\LaravelThemeInstaller\\ThemeInstallerPlugin"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Hexadog\\LaravelThemeInstaller\\": "src/"
+                },
+                "psr-4": {
+                    "Hexadog\\LaravelThemeInstaller\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gaetan",
+                    "email": "gaetan@hexadog.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/hexadog/laravel-theme-installer/issues",
+                "source": "https://github.com/hexadog/laravel-theme-installer"
+            },
+            "time": "2024-05-14T07:36:00+00:00"
+        },
+        {
+            "name": "hexadog/laravel-themes-manager",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexadog/laravel-themes-manager.git",
+                "reference": "b4471af87c8a38c6a1ff6c911b70344f967ca45a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexadog/laravel-themes-manager/zipball/b4471af87c8a38c6a1ff6c911b70344f967ca45a",
+                "reference": "b4471af87c8a38c6a1ff6c911b70344f967ca45a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "hexadog/laravel-theme-installer": "^1.0",
+                "illuminate/view": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.10",
+                "orchestra/testbench": "^8.3",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0|^10.0|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hexadog\\ThemesManager\\Providers\\PackageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Theme": "Hexadog\\ThemesManager\\Facades\\ThemesManager"
+                    },
+                    "dont-discover": []
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Hexadog\\ThemesManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gaetan",
+                    "email": "gaetan@hexadog.com"
+                }
+            ],
+            "description": "Bring multi themes support to your Laravel application with a full-featured Themes Manager",
+            "support": {
+                "issues": "https://github.com/hexadog/laravel-themes-manager/issues",
+                "source": "https://github.com/hexadog/laravel-themes-manager"
+            },
+            "time": "2024-05-05T18:22:03+00:00"
         },
         {
             "name": "laravel/breeze",

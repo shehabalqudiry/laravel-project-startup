@@ -31,10 +31,12 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = $this->find($id);
         $user->delete();
+        return true;
     }
 
     public function find($id)
     {
-        return User::findOrFail($id);
+        $user = User::find($id);
+        return $user ?: false;
     }
 }

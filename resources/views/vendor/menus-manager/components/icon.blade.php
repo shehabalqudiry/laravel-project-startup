@@ -1,7 +1,7 @@
-<div {{ $attributes->merge($item->attributes) }}>
+<i {{ $attributes->merge($item->attributes) }}>
     @isset($slot)
     {{ $slot }}
     @else
     {{ $icon }}
     @endif
-</div>
+</i>

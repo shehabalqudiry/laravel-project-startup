@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('theme:default')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
 
 Route::get('/dashboard', function () {

@@ -1,13 +1,19 @@
 <?php
 
+use Carbon\Traits\Mixin;
 use Illuminate\Support\Facades\Http;
 
 // TODO: Handling api responses
-function responseSuccess($data, $key = 'data', $msg = null, $status_code = 200)
+function responseSuccess($data, $key = 'data', $msg = null, $status_code = 200, $options = ['isView' => false, 'view' => null])
 {
+    // return if view
+    if ($options['isView'] == true) {
+        return view($options['view'], compact('data', 'options'));
+    }
+
     $returnData = [
         'status' => true,
-        'message' => $msg,
+        'message' => gettype($msg) == 'array' ? $msg[0] : $msg,
         $key => $data->items(),
     ];
 

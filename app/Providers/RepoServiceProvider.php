@@ -15,13 +15,7 @@ class RepoServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-        // $this->app->bind(UserService::class, function (Application $app) {
-        //     return new UserService($app->make(UserRepositoryInterface::class));
-        // });
+        //
     }
 
     /**

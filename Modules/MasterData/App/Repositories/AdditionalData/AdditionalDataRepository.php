@@ -38,13 +38,47 @@ class AdditionalDataRepository implements AdditionalDataInterface
             "edit" => "<button class='btn btn-primary'>Edit</button>",
             "delete" => "<button class='btn btn-danger'>Delete</button>",
         ];
+        $headerButtons = [
+            "add" => "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
+            // "delete" => "<button class='btn btn-danger'>Delete</button>",
+        ];
+        $modalInputs = [
+            [
+                "modalId" => "AddModal",
+                "formOptions" => "action=// method=POST",
+                "data" => [
+                    [
+                        "lable" => "Name",
+                        "type" => "text",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ], [
+                        "lable" => "Email",
+                        "type" => "email",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ],
+                    [
+                        "lable" => "Add New",
+                        "type" => "submit",
+                        "isButton" => true,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ],
+                ]
+            ]
 
+        ];
         $options = [
             'isView' => true,
             'view' => 'masterdata::index',
             'columns' => $columns,
             'actions' => $actions,
             'page_title' => __('Additional Data'),
+            'headerButtons'   => $headerButtons,
+            'modalInputs'   => $modalInputs,
         ];
         return responseSuccess($data, __('Additional Data'), options: $options);
         // return (new API)

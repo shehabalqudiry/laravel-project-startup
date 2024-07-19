@@ -4,6 +4,23 @@
     @if (in_array('page_title', $options))
         <h1 class="page-title">{{ $options['page_title'] }}</h1>
     @endif
+    @if (session()->has('done'))
+        <div class="mb-3 alert alert-success" role="alert">
+            {{ session()->get('done') }}
+        </div>
+    @endif
+    @if (session()->has('fail'))
+        <div class="mb-3 alert alert-danger" role="alert">
+            {{ session()->get('fail') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="mb-3 alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }} <br />
+            @endforeach
+        </div>
+    @endif
     <div class="card shadow">
         <div class="card-header">
             @if (in_array('headerButtons', $options))
@@ -33,8 +50,9 @@
 
                             @if ($options['actions'] != [])
                                 <td>
-                                    @foreach ($options['actions'] as $action)
-                                        {!! $action !!}
+                                    @foreach ($options['actions'] as $actionKey => $action)
+                                        <x-table-action-button-component :b_text="$action['label']" :b_class="$action['class']"
+                                            :b_href="$action['href']" :modal_id="'modal-' . $actionKey . '-' . $item->id" :options="$options" :action="'action=' . route($action['action_route'], $item->id)" :item="$item" :columns="$options['columns']"></x-table-action-button-component>
                                     @endforeach
                                 </td>
                             @endif
@@ -61,7 +79,7 @@
                             @foreach ($modalInput['data'] as $key => $input)
                                 <div class="form-group">
                                     @if (!$input['isButton'])
-                                        <label for="{{ $input['name'] }}">{{ $input['lable'] }}</label>
+                                        <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         <input type="{{ $input['type'] }}" class="form-control"
                                             value="{{ old($input['name']) }}" id="{{ $input['name'] }}"
                                             name="{{ $input['name'] }}">
@@ -70,11 +88,11 @@
                             @endforeach
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</ button>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</ button>
                                 @foreach ($modalInput['data'] as $key => $input)
                                     @if ($input['isButton'])
                                         <button type="{{ $input['type'] }}"
-                                            class="btn btn-primary">{{ $input['lable'] }}</button>
+                                            class="btn btn-outline-primary">{{ $input['label'] }}</button>
                                     @endif
                                 @endforeach
                         </div>

@@ -8,7 +8,7 @@ interface ActivityLogInterface
     public function index($request);
 
 
-    public function show($activity_log);
+    public function api($request);
 
 
     public function destroy($activity_log);

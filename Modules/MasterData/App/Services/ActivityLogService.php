@@ -6,21 +6,21 @@ use Modules\MasterData\App\Repositories\ActivityLogs\ActivityLogInterface;
 
 class ActivityLogService
 {
-    public function __construct(protected ActivityLogInterface $userRepository){}
+    public function __construct(protected ActivityLogInterface $activityLogRepository){}
 
     public function index(array $data)
     {
-        return $this->userRepository->index($data);
+        return $this->activityLogRepository->index($data);
     }
 
-    public function show($id)
+    public function api($request)
     {
-        return $this->userRepository->show($id);
+        return $this->activityLogRepository->api($request);
     }
 
     public function destroy($id)
     {
-        return $this->userRepository->destroy($id);
+        return $this->activityLogRepository->destroy($id);
     }
 
 }

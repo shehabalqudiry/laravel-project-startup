@@ -15,27 +15,17 @@ class ActivityLogController extends Controller
 
     public function __construct(protected ActivityLogService $activity_log){}
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         return $this->activity_log->index($request->all());
     }
 
-
-    /**
-     * Show the specified resource.
-     */
-    public function show(ActivityLog $activity_log)
+    public function api(ActivityLog $activity_log)
     {
-        return $this->activity_log->show($activity_log);
+        return $this->activity_log->api($activity_log);
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(ActivityLog $activity_log)
     {
         return $this->activity_log->destroy($activity_log);

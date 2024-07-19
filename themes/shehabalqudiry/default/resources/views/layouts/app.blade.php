@@ -37,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
 </head>
 
-<body class="vertical  dark rtl ">
+<body class="vertical  dark {{ app()->getLocale() == 'ar' ? 'rtl' : '' }}">
     <div class="wrapper">
         <!-- Page Heading -->
         @include('layouts\_partials\navbar')

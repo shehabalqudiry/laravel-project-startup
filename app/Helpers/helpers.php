@@ -43,9 +43,9 @@ function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 200)
 function uploadFile($file, $path)
 {
     $file_name = time() . '_' . $file->getClientOriginalName();
-    $file->move($path, $file_name);
+    $file->move(public_path($path), $file_name);
 
-    return $file_name;
+    return "$path/$file_name";
 }
 /* *************** end handling upload files *************** */
 

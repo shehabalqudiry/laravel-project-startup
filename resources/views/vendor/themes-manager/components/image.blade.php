@@ -1,4 +1,0 @@
-<img
-    src="{{ $source }}"
-    {{ $attributes }}
-/>

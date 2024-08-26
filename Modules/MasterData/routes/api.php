@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\MasterData\App\Http\Controllers\Apis\HomePageApi;
 use Modules\MasterData\App\Http\Controllers\MasterDataController;
 
 /*
@@ -14,9 +15,11 @@ use Modules\MasterData\App\Http\Controllers\MasterDataController;
  *
 */
 
+Route::prefix('v1')->name('api.')->group(function () {
+    Route::get('/home', [HomePageApi::class, 'index']);
+});
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
     Route::prefix('master-data')->name('activity-log.')->group(function () {
-      Route::resource('/activity-logs', ActivityLogController::class);
-  });
-
+        Route::resource('/activity-logs', ActivityLogController::class);
+    });
 });

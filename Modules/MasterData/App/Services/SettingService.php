@@ -2,37 +2,27 @@
 
 namespace Modules\MasterData\App\Services;
 
-use App\Models\User;
-use App\Repositories\User\UserRepositoryInterface;
+use Modules\MasterData\App\Repositories\Setting\SettingInterface;
 
-class CountryService
+class SettingService
 {
-    public function __construct(protected UserRepositoryInterface $userRepository)
+    public function __construct(protected SettingInterface $userRepository)
     {
     }
 
-    public function create(array $data)
+    public function index($data)
     {
-        return $this->userRepository->create($data);
+        return $this->userRepository->index($data);
     }
 
-    public function update(array $data, $id)
+    public function update($data, $id)
     {
         return $this->userRepository->update($data, $id);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        return $this->userRepository->delete($id);
+        return $this->userRepository->destroy($id);
     }
 
-    public function all($request)
-    {
-        return $this->userRepository->all($request);
-    }
-
-    public function find($id)
-    {
-        return $this->userRepository->find($id);
-    }
 }

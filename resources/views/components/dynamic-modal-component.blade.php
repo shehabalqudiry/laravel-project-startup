@@ -29,7 +29,8 @@
                             @endforeach
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}</ button>
+                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}
+                                </ button>
                                 @foreach ($modalInput['data'] as $key => $input)
                                     @if ($input['isButton'])
                                         <button type="{{ $input['type'] }}"
@@ -59,9 +60,9 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}</ button>
-                                <button type="submit"
-                                    class="btn btn-outline-danger">{{ __('Submit') }}</button>
+                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}
+                                </ button>
+                                <button type="submit" class="btn btn-outline-danger">{{ __('Submit') }}</button>
                         </div>
                     </form>
                 </div>
@@ -90,7 +91,8 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}</ button>
+                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}</
+                                button>
                     </div>
                 </div>
             </div>

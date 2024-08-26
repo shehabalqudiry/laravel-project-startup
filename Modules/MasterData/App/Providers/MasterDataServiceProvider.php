@@ -13,7 +13,10 @@ use Modules\MasterData\App\Repositories\ActivityLogs\ActivityLogInterface;
 use Modules\MasterData\App\Repositories\ActivityLogs\ActivityLogRepository;
 use Modules\MasterData\App\Repositories\AdditionalData\AdditionalDataInterface;
 use Modules\MasterData\App\Repositories\AdditionalData\AdditionalDataRepository;
+use Modules\MasterData\App\Repositories\Setting\SettingInterface;
+use Modules\MasterData\App\Repositories\Setting\SettingRepository;
 use Modules\MasterData\App\Services\AdditionalDataService;
+use Modules\MasterData\App\Services\SettingService;
 
 class MasterDataServiceProvider extends ServiceProvider
 {
@@ -26,7 +29,6 @@ class MasterDataServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // view()->share('menu', $menu);
         $this->registerCommands();
         $this->registerCommandSchedules();
         $this->registerTranslations();
@@ -36,7 +38,7 @@ class MasterDataServiceProvider extends ServiceProvider
         $menu = Menus::get('main');
 
         $menu->url(url('/'), __('Home'))->icon('fe fe-home fe-16');
-        $masterMenu = $menu->header('Master Data');
+        $masterMenu = $menu->header('Master Data')->icon('fe fe-settings fe-16');
 
         // General Config
         $masterMenu->route('activitylog.index', fn () => __('Activity Log'))
@@ -57,7 +59,7 @@ class MasterDataServiceProvider extends ServiceProvider
 
 
         // Zone Config (Submenu Example)
-        $zoneMenu = $masterMenu->header('Zone');
+        $zoneMenu = $masterMenu->header('Zone')->icon('fe fe-globe fe-16');
         $zoneMenu->route('country.index', fn () => __('Countries'))
             ->icon('fe fe-globe fe-16') // Globe icon
             ->if(fn () => /* auth()->check() && auth()->user()->can('view-country')*/ true);
@@ -124,9 +126,9 @@ class MasterDataServiceProvider extends ServiceProvider
         });
 
 
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
+        app()->bind(SettingInterface::class, SettingRepository::class);
+        app()->bind(SettingService::class, function ($app) {
+            return new SettingService($app->make(SettingInterface::class));
         });
 
 

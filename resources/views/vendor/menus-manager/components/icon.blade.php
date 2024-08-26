@@ -1,4 +1,4 @@
-<i {{ $attributes->merge($item->attributes) }}>
+<i {{ $attributes }}>
     @isset($slot)
     {{ $slot }}
     @else

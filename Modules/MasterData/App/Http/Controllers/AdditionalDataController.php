@@ -5,7 +5,7 @@ namespace Modules\MasterData\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Modules\MasterData\App\Services\AdditionalDataService;
 use Illuminate\Http\Request;
-use Modules\MasterData\AdditionalData\App\Models\AdditionalData;
+use Modules\MasterData\App\Models\AdditionalData;
 
 class AdditionalDataController extends Controller
 {

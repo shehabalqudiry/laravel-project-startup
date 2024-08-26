@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Hexadog\MenusManager\Facades\Menus;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Modules\MasterData\App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (Schema::hasTable('settings')) {
+            $settings = Setting::get()->pluck('value', 'key');
+        }
         view()->share('menu', Menus::register('main'));
+        view()->share('settings', $settings);
         // JsonResource::withoutWrapping();
     }
 }

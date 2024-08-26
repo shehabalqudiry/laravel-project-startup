@@ -15,8 +15,7 @@ class AreaDatabaseSeeder extends Seeder
         $actions = ['read', 'create', 'show', 'update', 'delete'];
         $models = [
             'area',
-
-        ]; 
+        ];
 
         foreach ($models as $model) {
             foreach ($actions as $action) {

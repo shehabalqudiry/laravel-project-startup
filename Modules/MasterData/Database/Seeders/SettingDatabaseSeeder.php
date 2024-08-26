@@ -1,10 +1,9 @@
 <?php
 
-namespace Modules\MasterData\Setting\Database\Seeders;
-
-use Modules\MasterData\Setting\App\Models\Setting;
+namespace Modules\MasterData\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\MasterData\App\Models\Setting;
 
 class SettingDatabaseSeeder extends Seeder
 {
@@ -13,20 +12,20 @@ class SettingDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $settings = [
-        //     'app_name'=>'text', 'app_logo'=>'file','exp_date'=>'date'
-        // ]; 
-
         $settings = [
-            'app_name' => 'text',
-            'app_logo' => 'file',
-            'exp_date' => 'date',
+            'app_name'                  => ['type' => 'text', 'title' => 'General Settings'],
+            'app_description'           => ['type' => 'textarea', 'title' => 'General Settings'],
+            'app_logo'                  => ['type' => 'file', 'title' => 'General Settings'],
+            'app_email'                 => ['type' => 'email', 'title' => 'General Settings'],
+            'app_phone'                 => ['type' => 'text', 'title' => 'General Settings'],
+            'app_address'               => ['type' => 'text', 'title' => 'General Settings'],
         ];
-        
+
         foreach ($settings as $key => $setting) {
             Setting::create([
                 'key' => $key,
-                'type' => $setting,
+                'type' => $setting['type'],
+                'title' => $setting['title'],
             ]);
         }
     }

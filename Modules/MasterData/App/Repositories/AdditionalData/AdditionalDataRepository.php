@@ -35,8 +35,9 @@ class AdditionalDataRepository implements AdditionalDataInterface
             "value"  => __("Value")
         ];
         $actions = [
-            "edit" => "<button class='btn btn-primary'>Edit</button>",
-            "delete" => "<button class='btn btn-danger'>Delete</button>",
+            "edit" => ["label" => "Edit", "class" => 'btn btn-outline-primary', "href" => "#", "action_route" => 'additionaldata.update'],
+            "show" => ["label" => "Show", "class" => 'btn btn-outline-info', "href" => "#", "action_route" => 'additionaldata.show'],
+            "delete" => ["label" => "Delete", "class" => 'btn btn-outline-danger', "href" => "#", "action_route" => 'additionaldata.destroy'],
         ];
         $headerButtons = [
             "add" => "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
@@ -48,20 +49,20 @@ class AdditionalDataRepository implements AdditionalDataInterface
                 "formOptions" => "action=// method=POST",
                 "data" => [
                     [
-                        "lable" => "Name",
+                        "label" => "Name",
                         "type" => "text",
                         "isButton" => false,
                         "name" => "name",
                         "value" => "old('name')",
                     ], [
-                        "lable" => "Email",
+                        "label" => "Email",
                         "type" => "email",
                         "isButton" => false,
                         "name" => "name",
                         "value" => "old('name')",
                     ],
                     [
-                        "lable" => "Add New",
+                        "label" => "Add New",
                         "type" => "submit",
                         "isButton" => true,
                         "name" => "name",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\RoleAndPermission\App\Models;
+namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,7 @@ use App\Traits\ActivityLogTrait;
 
 class Role extends MasterRole
 {
-    use HasFactory ,Searchable,HasTranslations;
+    use HasFactory ,HasTranslations;
 
     use ActivityLogTrait;
 
@@ -36,13 +36,6 @@ class Role extends MasterRole
         }
     }
 
-    /////////////////////// search with relations models ///////////////////
-    public function toSearchableArray(): array
-    {
-        return [
-            'name' => $this->name,
-        ];
-    }
 
     /////////////////////////////////////////////////////////////////
 

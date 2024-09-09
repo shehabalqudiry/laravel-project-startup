@@ -2,21 +2,42 @@
 
 namespace Modules\MasterData\App\Providers;
 
+use Illuminate\Support\Facades\Blade;
+use Hexadog\MenusManager\Facades\Menus;
+use Illuminate\Support\ServiceProvider;
 use App\Repositories\User\UserRepository;
 use app\Repositories\User\UserRepositoryInterface;
-use Modules\MasterData\App\Services\ActivityLogService;
-use Modules\MasterData\App\Services\UserService;
-use Hexadog\MenusManager\Facades\Menus;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
-use Modules\MasterData\App\Repositories\ActivityLogs\ActivityLogInterface;
-use Modules\MasterData\App\Repositories\ActivityLogs\ActivityLogRepository;
-use Modules\MasterData\App\Repositories\AdditionalData\AdditionalDataInterface;
-use Modules\MasterData\App\Repositories\AdditionalData\AdditionalDataRepository;
-use Modules\MasterData\App\Repositories\Setting\SettingInterface;
-use Modules\MasterData\App\Repositories\Setting\SettingRepository;
-use Modules\MasterData\App\Services\AdditionalDataService;
-use Modules\MasterData\App\Services\SettingService;
+use Modules\MasterData\App\Services\Dashboard\UserService;
+use Modules\MasterData\App\Services\Dashboard\SettingService;
+use Modules\MasterData\App\Services\Dashboard\ActivityLogService;
+use Modules\MasterData\App\Services\Dashboard\AdditionalDataService;
+use Modules\MasterData\App\Repositories\Dashboard\Setting\SettingInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Setting\SettingRepository;
+use Modules\MasterData\App\Repositories\Dashboard\ActivityLogs\ActivityLogInterface;
+use Modules\MasterData\App\Repositories\Dashboard\ActivityLogs\ActivityLogRepository;
+use Modules\MasterData\App\Repositories\Dashboard\AdditionalData\AdditionalDataInterface;
+use Modules\MasterData\App\Repositories\Dashboard\AdditionalData\AdditionalDataRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Area\AreaInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Area\AreaRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Branch\BranchInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Branch\BranchRepository;
+use Modules\MasterData\App\Repositories\Dashboard\City\CityInterface;
+use Modules\MasterData\App\Repositories\Dashboard\City\CityRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Client\ClientInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Client\ClientRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Country\CountryInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Country\CountryRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Currency\CurrencyInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Currency\CurrencyRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Department\DepartmentInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Department\DepartmentRepository;
+use Modules\MasterData\App\Services\Dashboard\AreaService;
+use Modules\MasterData\App\Services\Dashboard\BranchService;
+use Modules\MasterData\App\Services\Dashboard\CityService;
+use Modules\MasterData\App\Services\Dashboard\ClientService;
+use Modules\MasterData\App\Services\Dashboard\CountryService;
+use Modules\MasterData\App\Services\Dashboard\CurrencyService;
+use Modules\MasterData\App\Services\Dashboard\DepartmentService;
 
 class MasterDataServiceProvider extends ServiceProvider
 {
@@ -126,53 +147,54 @@ class MasterDataServiceProvider extends ServiceProvider
         });
 
 
+
+
+        app()->bind(AreaInterface::class, AreaRepository::class);
+        app()->bind(AreaService::class, function ($app) {
+            return new AreaService($app->make(AreaInterface::class));
+        });
+
+
+
+        app()->bind(BranchInterface::class, BranchRepository::class);
+        app()->bind(BranchService::class, function ($app) {
+            return new BranchService($app->make(BranchInterface::class));
+        });
+
+
+
+        app()->bind(CityInterface::class, CityRepository::class);
+        app()->bind(CityService::class, function ($app) {
+            return new CityService($app->make(CityRepository::class));
+        });
+
+
+
+        app()->bind(ClientInterface::class, ClientRepository::class);
+        app()->bind(ClientService::class, function ($app) {
+            return new ClientService($app->make(ClientRepository::class));
+        });
+
+
+        app()->bind(CountryInterface::class, CountryRepository::class);
+        app()->bind(CountryService::class, function ($app) {
+            return new CountryService($app->make(CountryRepository::class));
+        });
+
+
+        app()->bind(CurrencyInterface::class, CurrencyRepository::class);
+        app()->bind(CurrencyService::class, function ($app) {
+            return new CurrencyService($app->make(CurrencyRepository::class));
+        });
+
+        app()->bind(DepartmentInterface::class, DepartmentRepository::class);
+        app()->bind(DepartmentService::class, function ($app) {
+            return new DepartmentService($app->make(DepartmentRepository::class));
+        });
+
         app()->bind(SettingInterface::class, SettingRepository::class);
         app()->bind(SettingService::class, function ($app) {
             return new SettingService($app->make(SettingInterface::class));
-        });
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
-        });
-
-        app()->bind(UserRepositoryInterface::class, UserRepository::class);
-        app()->bind(UserService::class, function ($app) {
-            return new UserService($app->make(UserRepositoryInterface::class));
         });
     }
 

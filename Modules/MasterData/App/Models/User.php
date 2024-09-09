@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\Admin\App\Models;
+namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Avatar;

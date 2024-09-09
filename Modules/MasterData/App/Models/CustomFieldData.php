@@ -1,19 +1,20 @@
 <?php
 
-namespace Modules\MasterData\CustomField\App\Models;
+namespace Modules\MasterData\App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-// use Spatie\Translatable\HasTranslations;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+// use Spatie\Translatable\HasTranslations;
+use Modules\MasterData\App\Models\CustomField;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class CustomFieldData extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes , InteractsWithMedia , Searchable;
+    use HasFactory,SoftDeletes , InteractsWithMedia ;
 
     /////////////////////// search with relations models ///////////////////
 
@@ -41,18 +42,11 @@ class CustomFieldData extends Model implements HasMedia
         $query->where('status' , 1);
     }
 
-    /////////////////////// search with relations models ///////////////////
-    public function toSearchableArray()
-    {
-        return [
-            'value'=> $this->value,
-        ];
-    }
 
 
     public function custom_field()
     {
-        return $this->belongsTo(\Modules\MasterData\CustomField\App\Models\CustomField::class, 'custom_field_id', 'id');
+        return $this->belongsTo(CustomField::class, 'custom_field_id', 'id');
     }
 
     /////////////////////////////////////////////////////////////////

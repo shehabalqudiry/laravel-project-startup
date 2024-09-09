@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\Country\App\Models;
+namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +13,7 @@ use Laravel\Scout\Searchable;
 
 class Country extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia , Searchable;
+    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia ;
 
     /**
      * The attributes that are mass assignable.
@@ -31,31 +31,7 @@ class Country extends Model implements HasMedia
         $query->where('status' , 1);
     }
 
-    public function toSearchableArray(): array
-    {
-        return [
-            'name->'.app()->getLocale() => $this->getTranslation('name', app()->getLocale()),
-        ];
-    }
 
-    // add thumbnail
-
-//    public function registerMediaConversions(Media $media = null)
-//    {
-//        $this->addMediaConversion('country-thumb')
-//            ->width(150)
-//            ->height(150);
-//    }
-
-    // while make event ( trigger )
-
-//    protected static function booted()
-//    {
-//        static::creating(function ($item) {
-//            $max = static::max('item_id');
-//            $max ? $item->item_id = $max + 1 : $item->item_id = 1000;
-//        });
-//    }
     public function getImgAttribute()
     {
         $file = $this->getMedia('country')->last();
@@ -87,9 +63,5 @@ class Country extends Model implements HasMedia
         return ($urls);
     }
 
-//    public function users()
-//    {
-//        return $this->hasMany(User::class);
-//    }
 
 }

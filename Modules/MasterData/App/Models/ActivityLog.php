@@ -22,7 +22,7 @@ class ActivityLog extends Activity
         if ($this->causer_type == 'App\Models\User') {
             $userName = User::find($this->causer_id)->name;
         } elseif ($this->causer_type == 'Modules\MasterData\Admin\App\Models\User') {
-            $userName = AdminUser::find($this->causer_id)->name;
+            $userName = User::find($this->causer_id)->name;
         }else{
             $userName = '----';
         }

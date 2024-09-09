@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\Currency\App\Models;
+namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,15 +14,8 @@ use Modules\MasterData\Currency\App\Filters\CurrencyFilter;
 
 class Currency extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia , Searchable;
+    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia ;
 
-    /////////////////////// search with relations models ///////////////////
-
-//    use Searchable {
-//          Searchable::search as parentSearch;
-//    }
-
-    ////////////////////////////////////////////////////////////////////////
 
     /**
      * The attributes that are mass assignable.
@@ -40,23 +33,8 @@ class Currency extends Model implements HasMedia
         $query->where('status' , 1);
     }
 
-    public function scopeFilter($query,CurrencyFilter $filter)
-    {
-        return $filter->apply($query);
-    }
 
 
-    /////////////////////// search with relations models ///////////////////
-    public function toSearchableArray()
-    {
-        return [
-            'name->'.app()->getLocale() => $this->getTranslation('name', app()->getLocale()),
-        ];
-    }
-  public function safe()
-    {
-        return $this->hasMany(Safe::class);
-    }
 
     /////////////////////////////////////////////////////////////////
 

@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         if (Schema::hasTable('settings')) {
             $settings = Setting::get()->pluck('value', 'key');
+            view()->share('settings', $settings);
         }
         view()->share('menu', Menus::register('main'));
-        view()->share('settings', $settings);
         // JsonResource::withoutWrapping();
     }
 }

@@ -35,7 +35,7 @@ function responseSuccess($data, $key = 'data', $msg = null, $status_code = 200, 
     return response()->json($returnData, $status_code);
 }
 
-function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 200)
+function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 400)
 {
     $returnData = [
         'status'    => false,

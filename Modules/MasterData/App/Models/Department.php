@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\Department\App\Models;
+namespace Modules\MasterData\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +13,7 @@ use Laravel\Scout\Searchable;
 
 class Department extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia , Searchable;
+    use HasFactory,SoftDeletes ,HasTranslations , InteractsWithMedia ;
 
     /**
      * The attributes that are mass assignable.
@@ -31,11 +31,5 @@ class Department extends Model implements HasMedia
         $query->where('status' , 1);
     }
 
-    public function toSearchableArray(): array
-    {
-        return [
-            'name->'.app()->getLocale() => $this->getTranslation('name', app()->getLocale()),
-        ];
-    }
-    
+
 }

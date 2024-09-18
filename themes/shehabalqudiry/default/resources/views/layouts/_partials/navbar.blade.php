@@ -31,7 +31,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButtonEmoji"
                 style="margin: 0px; position: absolute; inset: 0px auto auto 0px; transform: translate(-180px, 38px);">
-                <a class="dropdown-item" href="#"><span class="dropdown-item-emoji"><i
+                <a class="dropdown-item" href="{{ route('admin.profile.edit') }}"><span class="dropdown-item-emoji"><i
                             class="bi bi-person-fill"></i></span> {{ __('Profile') }}</a>
                 {{--  <a class="dropdown-item" href="#"><span class="dropdown-item-emoji">😎</span></a>  --}}
                 {{--  logout form  --}}

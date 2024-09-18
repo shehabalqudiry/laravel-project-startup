@@ -1,11 +1,8 @@
 {{--  @dd($data)  --}}
 @extends('layouts.app')
-@extends('page-title', __("Settings"))
+@extends('page-title', __('Settings'))
 
 @section('theme-content')
-    @if (in_array('page_title', $options))
-        <h1 class="page-title">{{ $options['page_title'] }}</h1>
-    @endif
     @if (session()->has('done'))
         <div class="mb-3 alert alert-success" role="alert">
             {{ session()->get('done') }}
@@ -45,7 +42,8 @@
                                         <label
                                             for="item{{ $loop->iteration }}">{{ ucwords(str_replace(['_', '-'], ' ', $data_item->key)) }}</label>
                                         <input type="{{ $data_item->type }}" id="item{{ $loop->iteration }}"
-                                            value="{{ $data_item->value ?? '' }}" class="{{ $data_item->type == 'file' ? 'form-control-file' : 'form-control' }}"
+                                            value="{{ $data_item->value ?? '' }}"
+                                            class="{{ $data_item->type == 'file' ? 'form-control-file' : 'form-control' }}"
                                             name="{{ $data_item->key }}"
                                             placeholder="{{ ucwords(str_replace(['_', '-'], ' ', $data_item->key)) }}">
                                     </div>
@@ -54,9 +52,8 @@
                         </div>
                     @endforeach
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __("Save") }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
             </form>
         </div>
-
-    </div> <!-- /.card-body -->
+    </div>
 @endsection

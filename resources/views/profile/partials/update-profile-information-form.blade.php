@@ -34,8 +34,8 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-danger font-2" />
         </div>
         
-        <div class="flex items-center">
-            <button class="btn btn-block btn-primary shadow-md mt-2" type="submit">{{ __('Save') }}</button>
+        <button class="btn btn-block btn-primary shadow-md mt-2" type="submit">{{ __('Save') }}</button>
+        <div class="flex items-center mt-3">
             @if (session('status') === 'profile-updated')
                 <div class="alert alert-light-success color-success alert-dismissible show fade">
                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">

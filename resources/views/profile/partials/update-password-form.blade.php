@@ -85,8 +85,8 @@
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2 text-danger font-2" />
         </div>
         
-        <div class="flex items-center">
-            <button class="btn btn-primary btn-block shadow-md mt-2" type="submit">{{ __('Save') }}</button>
+        <button class="btn btn-primary btn-block shadow-md mt-2" type="submit">{{ __('Save') }}</button>
+        <div class="flex items-center mt-3">
             @if (session('status') === 'password-updated')
                 <div class="alert alert-light-success color-success alert-dismissible show fade">
                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">

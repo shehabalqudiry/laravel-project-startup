@@ -17,29 +17,17 @@
     <link rel="icon" href="{{ theme_asset('favicon.ico') }}">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{{ theme_asset("assets/css/bootstrap.css") }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ theme_asset('assets/css/bootstrap.css') }}" />
 
-    <link rel="stylesheet" href="{{ theme_asset("assets/vendors/iconly/bold.css") }}" />
+    <link rel="stylesheet" href="{{ theme_asset('assets/vendors/iconly/bold.css') }}" />
 
-    <link
-      rel="stylesheet"
-      href="{{ theme_asset("assets/vendors/perfect-scrollbar/perfect-scrollbar.css") }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ theme_asset("assets/vendors/bootstrap-icons/bootstrap-icons.css") }}"
-    />
-    <link rel="stylesheet" href="{{ theme_asset("assets/css/app.css") }}" />
-    <link rel="stylesheet" href="{{ theme_asset("assets/css/app-dark.css") }}" />
-    <link
-      rel="shortcut icon"
-      href="{{ theme_asset("assets/images/favicon.svg") }}"
-      type="image/x-icon"
-    />
+    <link rel="stylesheet" href="{{ theme_asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ theme_asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}" />
+    <link rel="stylesheet" href="{{ theme_asset('assets/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ theme_asset('assets/css/app-dark.css') }}" />
+    <link rel="shortcut icon" href="{{ theme_asset('assets/images/favicon.svg') }}" type="image/x-icon" />
 </head>
 
 <body class="{{ app()->getLocale() == 'ar' ? 'rtl' : '' }}">
@@ -50,23 +38,21 @@
 
         <!-- Page Content -->
         <div id="main">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10 col-xl-8">
-                        @yield('theme-content')
-                    </div>
-                </div> <!-- .row -->
-            </div> <!-- .container-fluid -->
-        </main> <!-- main -->
-    </div> <!-- .wrapper -->
-    @stack('modals')
-    <script src="{{ theme_asset("assets/js/dark.js") }}"></script>
-    <script src="{{ theme_asset("assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js") }}"></script>
-    <script src="{{ theme_asset("assets/js/app.js") }}"></script>
+            <div class="page-heading">
+                <h3>@yield('page-title')</h3>
+            </div>
+            <div class="page-content">
+                @yield('theme-content')
+            </div>
+        </div> <!-- .wrapper -->
+        @stack('modals')
+        <script src="{{ theme_asset('assets/js/dark.js') }}"></script>
+        <script src="{{ theme_asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ theme_asset('assets/js/app.js') }}"></script>
 
-    <script src="{{ theme_asset("assets/vendors/apexcharts/apexcharts.js") }}"></script>
-    <script src="{{ theme_asset("assets/js/pages/dashboard.js") }}"></script>
-    {{--  <script>
+        <script src="{{ theme_asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
+        <script src="{{ theme_asset('assets/js/pages/dashboard.js') }}"></script>
+        {{--  <script>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {

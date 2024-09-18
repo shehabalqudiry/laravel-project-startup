@@ -16,14 +16,14 @@ class ActivityLogRepository implements ActivityLogInterface
 
 
 
-    public function index($request): \Illuminate\Http\JsonResponse
+    public function index($request)
     {
         $perPage = $request['per_page'] ?? config('myConfig.paginationCount');
         $collection = $this->model->orderBy('created_at', 'desc');
         $collection = ActivityLogFilters::apply($this->model);
         $data = $perPage == -1 ? $collection->get() : $collection->paginate($perPage);
 
-        return responseSuccess($data,msg:'data');
+        return responseSuccess($data,msg:'data', options:["isView" => true, "view" => 'masterdata::activity-logs.index', 'columns' => ['log_name' => __("Name"), "user_name" => "User Name"]]);
     }
 
     public function store($request)

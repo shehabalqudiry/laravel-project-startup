@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use Modules\MasterData\App\Http\Requests\Settings\StoreRequest;
 use Modules\MasterData\App\Http\Requests\Settings\UpdateRequest;
 use Modules\MasterData\App\Models\Setting;
-use Modules\MasterData\App\Services\SettingService;
+use Modules\MasterData\App\Services\Dashboard\SettingService;
 use Modules\MasterData\Setting\App\Repositories\SettingInterface;
 class SettingController extends Controller
 {

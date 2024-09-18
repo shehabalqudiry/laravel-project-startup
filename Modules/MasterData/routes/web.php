@@ -2,18 +2,19 @@
 
 use App\Http\Controllers\Apis\Users\UserController;
 use Illuminate\Support\Facades\Route;
-use Modules\MasterData\App\Http\Controllers\ActivityLogController;
-use Modules\MasterData\App\Http\Controllers\AdditionalDataController;
-use Modules\MasterData\App\Http\Controllers\AreaController;
-use Modules\MasterData\App\Http\Controllers\AuthController;
-use Modules\MasterData\App\Http\Controllers\BranchController;
-use Modules\MasterData\App\Http\Controllers\CityController;
-use Modules\MasterData\App\Http\Controllers\ClientController;
-use Modules\MasterData\App\Http\Controllers\CountryController;
-use Modules\MasterData\App\Http\Controllers\CurrencyController;
-use Modules\MasterData\App\Http\Controllers\CustomFieldController;
-use Modules\MasterData\App\Http\Controllers\DepartmentController;
-use Modules\MasterData\App\Http\Controllers\SettingController;
+
+use Modules\MasterData\App\Http\Controllers\Dashboard\AdditionalDataController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\AreaController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\AuthController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\BranchController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CityController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\ClientController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CountryController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CurrencyController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CustomFieldController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\ActivityLogController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\DepartmentController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\SettingController;
 
 /*
 |--------------------------------------------------------------------------

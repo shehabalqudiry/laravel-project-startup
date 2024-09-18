@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\App\resource\Settings\Dashboard;
+namespace Modules\MasterData\App\resource\Dashboard\Settings;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 class SettingResource extends JsonResource

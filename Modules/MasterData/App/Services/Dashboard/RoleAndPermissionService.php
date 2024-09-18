@@ -4,35 +4,46 @@ namespace Modules\MasterData\App\Services\Dashboard;
 
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\PermissionInterface;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\RoleInterface;
 
 class RoleAndPermissionService
 {
-    public function __construct(protected UserRepositoryInterface $userRepository)
+    public function __construct(
+        protected RoleInterface $role,
+        protected PermissionInterface $permission
+        )
     {
     }
 
-    public function create(array $data)
+    public function getPermissions($request)
     {
-        return $this->userRepository->create($data);
+        return $this->permission->index($request);
     }
 
-    public function update(array $data, $id)
+    public function getRoles($request)
     {
-        return $this->userRepository->update($data, $id);
+        return $this->role->index($request);
     }
 
-    public function delete($id)
+    public function createRole($request)
     {
-        return $this->userRepository->delete($id);
+        return $this->role->store($request);
     }
 
-    public function all($request)
+
+    public function showRole($role)
     {
-        return $this->userRepository->all($request);
+        return $this->role->show($role);
     }
 
-    public function find($id)
+    public function updateRole($role , $request)
     {
-        return $this->userRepository->find($id);
+        return $this->role->update($role , $request);
+    }
+
+    public function destroy($role)
+    {
+        return $this->role->destroy($role);
     }
 }

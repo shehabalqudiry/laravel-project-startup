@@ -1,5 +1,6 @@
 {{--  @dd($data)  --}}
 @extends('layouts.app')
+@extends('page-title', __("Settings"))
 
 @section('theme-content')
     @if (in_array('page_title', $options))

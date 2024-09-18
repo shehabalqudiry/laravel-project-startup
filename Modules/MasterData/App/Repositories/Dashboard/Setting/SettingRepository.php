@@ -7,7 +7,7 @@ use App\Traits\API;
 use Illuminate\Support\Facades\File;
 use Modules\MasterData\Setting\App\Http\Requests\StoreRequest;
 use Modules\MasterData\App\Models\Setting;
-use Modules\MasterData\App\resource\Settings\SettingResource;
+use Modules\MasterData\App\resource\Dashboard\Settings\SettingResource;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -65,6 +65,26 @@ class SettingRepository implements SettingInterface
         return responseSuccess($data, __('Settings'), options: $options);
     }
     public function update($setting, $request)
+    {
+        try {
+            // return $setting;
+            $setting->update($request->validated());
+            if ($setting->value && $setting->type == 'file') {
+                $file = $request->file('value');
+                $filename = $file->getClientOriginalName();
+                $path = '/uploads/settings/';
+                $file->move($path, $filename);
+                $setting->update(['value' => $path . $filename]);
+            }
+
+
+
+            return back()->with('success', "Setting Updated Successfully");
+        } catch (\Exception $e) {
+            return back()->with('fail', "Error : " . $e->getMessage());
+        }
+    }
+    public function destroy($setting)
     {
         try {
             // return $setting;

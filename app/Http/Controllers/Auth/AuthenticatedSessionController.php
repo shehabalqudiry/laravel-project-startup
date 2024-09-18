@@ -26,6 +26,10 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if(session()->has('url.intended')) {
+            return redirect()->intended(session('url.intended'));
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('admin.dashboard', absolute: false));

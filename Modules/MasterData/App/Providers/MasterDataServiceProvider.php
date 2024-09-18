@@ -63,59 +63,59 @@ class MasterDataServiceProvider extends ServiceProvider
         // General Config
         $masterMenu->route('activitylog.index', fn () => __('Activity Log'))
             ->icon('bi bi-list-ol fe-16') // Activity log icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-activitylog')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-activitylog'));
 
         $masterMenu->route('additionaldata.index', fn () => __('Additional Data'))
             ->icon('bi bi-database-fill fe-16') // Data icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-additionaldata')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-additionaldata'));
 
         $masterMenu->route('customfield.index', fn () => __('Custom Fields'))
             ->icon('bi bi-sliders fe-16') // Customization icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-customfield')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-customfield'));
 
         $masterMenu->route('setting.index', fn () => __('Settings'))
             ->icon('bi bi-gear-fill fe-16') // Settings icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-setting')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-setting'));
 
         // Zone Config (Submenu Example)
         $zoneMenu = $masterMenu->header('Zone')->icon('bi bi-globe fe-16');
         $zoneMenu->route('country.index', fn () => __('Countries'))
             ->icon('bi bi-globe-fill fe-16') // Globe icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-country')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-country'));
 
         $zoneMenu->route('city.index', fn () => __('Cities'))
             ->icon('bi bi-map-pin-fill fe-16') // Map pin icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-city')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-city'));
 
         $zoneMenu->route('area.index', fn () => __('Areas'))
             ->icon('bi bi-map-fill fe-16') // Map icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-area')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-area'));
 
         $zoneMenu->route('currency.index', fn () => __('Currencies'))
             ->icon('bi bi-dollar-sign-fill fe-16') // Currency icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-currency')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-currency'));
 
 
         // Client Config
         $masterMenu->route('client.index', fn () => __('Clients'))
             ->icon('bi bi-people-fill fe-16') // Users icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-client')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-client'));
 
         // Admin Config
         $masterMenu->route('user.index', fn () => __('Admin'))
             ->icon('bi bi-person-fill-lock fe-16') // User check icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-user')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-user'));
         // $masterMenu->route('auth.index', fn () => __('Authentication'))
         //     ->icon('bi bi-lock-fill fe-16') // Lock icon
-        //     ->if(fn () => /* auth()->check() && auth()->user()->can('view-auth')*/ true);
+        //     ->if(fn () => auth()->check() && auth()->user()->can('view-auth'));
 
         // Company Config
         $masterMenu->route('branch.index', fn () => __('Branches'))
             ->icon('bi bi-house-fill fe-16') // Branch icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-branch')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-branch'));
         $masterMenu->route('department.index', fn () => __('Departments'))
             ->icon('bi bi-briefcase-fill fe-16') // Briefcase icon
-            ->if(fn () => /* auth()->check() && auth()->user()->can('view-department')*/ true);
+            ->if(fn () => auth()->check() && auth()->user()->can('view-department'));
 
         // // Conditional Menu Items
         // $masterMenu->route('profile.show', fn () => __('Profile'))

@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\MasterData\Currency\Database\Seeders;
-use Modules\MasterData\RoleAndPermission\App\Models\Permission;
+use Modules\MasterData\App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class CurrencyDatabaseSeeder extends Seeder

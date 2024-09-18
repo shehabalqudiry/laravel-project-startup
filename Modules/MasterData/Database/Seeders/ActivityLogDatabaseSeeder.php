@@ -2,8 +2,8 @@
 
 namespace Modules\MasterData\ActivityLog\Database\Seeders;
 
-use Modules\MasterData\RoleAndPermission\App\Models\Permission;
 use Illuminate\Database\Seeder;
+use Modules\MasterData\App\Models\Permission;
 
 class ActivityLogDatabaseSeeder extends Seeder
 {
@@ -15,19 +15,19 @@ class ActivityLogDatabaseSeeder extends Seeder
         $actions = ['read', 'create', 'show', 'update', 'delete'];
         $models = [
             'activity_log',
-
         ]; 
 
         foreach ($models as $model) {
             foreach ($actions as $action) {
                 $permissionName = $action . '-' . strtolower($model); // Example: create-post
                 $existingPermission = Permission::where('name',$permissionName)
-                    ->where('guard_name', 'sanctum')
+                    ->where('guard_name', 'web')
                     ->exists();
                 if (!$existingPermission) {
                     Permission::create([
                         'name' => $permissionName,
-                        'guard_name'=>'sanctum',
+                        'module' => $model,
+                        'guard_name'=>'web',
                     ]);
                 }
             }

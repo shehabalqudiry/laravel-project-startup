@@ -2,7 +2,7 @@
 
 namespace Modules\MasterData\Client\Database\Seeders;
 
-use Modules\MasterData\RoleAndPermission\App\Models\Permission;
+use Modules\MasterData\App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class ClientDatabaseSeeder extends Seeder
@@ -22,12 +22,13 @@ class ClientDatabaseSeeder extends Seeder
             foreach ($actions as $action) {
                 $permissionName = $action . '-' . strtolower($model); // Example: create-post
                 $existingPermission = Permission::where('name',$permissionName)
-                    ->where('guard_name', 'sanctum')
+                    ->where('guard_name', 'web')
                     ->exists();
                 if (!$existingPermission) {
                     Permission::create([
                         'name' => $permissionName,
-                        'guard_name'=>'sanctum',
+                        'module' => $model,
+                        'guard_name'=>'web',
                     ]);
                 }
             }

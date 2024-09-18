@@ -1,8 +1,8 @@
 <?php
 
 namespace Modules\MasterData\Currency\Database\Seeders;
-use Modules\MasterData\Setting\App\Models\Setting;
 use Illuminate\Database\Seeder;
+use Modules\MasterData\App\Models\Setting;
 
 class AddCurrencyBaseInSettingSeeder extends Seeder
 {

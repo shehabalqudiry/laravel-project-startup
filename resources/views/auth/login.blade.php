@@ -69,12 +69,12 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="{{ route('dashboard') }}"><img src="{{ $settings['app_logo'] }}" alt="Logo"></a>
+                        <a href="{{ route('admin.dashboard') }}"><img src="{{ $settings['app_logo'] }}" alt="Logo"></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5"></p>
 
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('admin.login') }}">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="email" class="form-control form-control-xl {{ $errors->get('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}"
@@ -103,7 +103,7 @@
                             type="submit">{{ __('Log in') }}</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
-                        <p><a class="font-bold" href="{{ route('password.email') }}">{{ __('Forgot your password?') }}</a></p>
+                        <p><a class="font-bold" href="{{ route('admin.password.email') }}">{{ __('Forgot your password?') }}</a></p>
                     </div>
                 </div>
             </div>

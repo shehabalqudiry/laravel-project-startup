@@ -33,8 +33,8 @@
 <body class="{{ app()->getLocale() == 'ar' ? 'rtl' : '' }}">
     <div id="app" class="wrapper">
         <!-- Page Heading -->
-        @include('layouts\_partials\navbar')
-        @include('layouts\_partials\sidbar')
+        @include('layouts._partials.navbar')
+        @include('layouts._partials.sidbar')
 
         <!-- Page Content -->
         <div id="main">

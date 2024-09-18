@@ -14,7 +14,6 @@ class ThemeLoader extends HexadogThemeLoader
             // Set a specific theme for matching urls
             $theme = config('settings.default_theme', 'shehabalqudiry/default');
         }
-        // dd(theme_asset('/'));
         // Call parent Middleware handle method
         return parent::handle($request, $next, $theme);
     }

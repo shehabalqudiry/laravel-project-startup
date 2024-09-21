@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\AdditionalData\Database\Seeders;
+namespace Modules\MasterData\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 

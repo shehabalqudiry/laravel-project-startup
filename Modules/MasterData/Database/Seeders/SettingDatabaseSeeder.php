@@ -3,6 +3,7 @@
 namespace Modules\MasterData\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\MasterData\App\Models\Permission;
 use Modules\MasterData\App\Models\Setting;
 
 class SettingDatabaseSeeder extends Seeder
@@ -28,5 +29,28 @@ class SettingDatabaseSeeder extends Seeder
                 'title' => $setting['title'],
             ]);
         }
+
+        $actions = ['update'];
+        $models = [
+            'setting',
+        ];
+
+        foreach ($models as $model) {
+            foreach ($actions as $action) {
+                $permissionName = $action . '-' . strtolower($model); // Example: create-post
+
+                $existingPermission = Permission::where('name', $permissionName)
+                    ->where('guard_name', 'web')
+                    ->exists();
+                if (!$existingPermission) {
+                    Permission::create([
+                        'name' => $permissionName,
+                        'module' => $model,
+                        'guard_name'=>'web',
+                    ]);
+                }
+            }
+        }
+
     }
 }

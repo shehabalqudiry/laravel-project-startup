@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\City\Database\Seeders;
+namespace Modules\MasterData\Database\Seeders;
 
 use Modules\MasterData\App\Models\Permission;
 use Illuminate\Database\Seeder;
@@ -15,7 +15,6 @@ class CityDatabaseSeeder extends Seeder
         $actions = ['read', 'create', 'show', 'update', 'delete'];
         $models = [
             'city',
-
         ]; 
 
         foreach ($models as $model) {

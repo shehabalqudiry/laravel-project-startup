@@ -15,16 +15,10 @@ class Role extends MasterRole
 
     use ActivityLogTrait;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    protected $guarded = ['id'];
-    public $translatable = ['name'];
 
-    protected $casts = [
-        'name' => 'json'
-    ];
+    protected $guarded = ['id'];
+    public $translatable = ['display_name'];
+
 
     public function getAttribute($key)
     {
@@ -36,7 +30,5 @@ class Role extends MasterRole
         }
     }
 
-
-    /////////////////////////////////////////////////////////////////
 
 }

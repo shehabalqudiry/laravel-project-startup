@@ -11,6 +11,7 @@ use Laravolt\Avatar\Avatar;
 class User extends OldUser
 {
     use HasFactory, SoftDeletes;
+    protected $guard_name = 'web';
     protected $guarded = ['id'];
 
 
@@ -22,7 +23,7 @@ class User extends OldUser
     public function getAvatarAttribute($value)
     {
         if (!$value) {
-            Avatar::create('Joko Widodo')->toBase64();
+            (new Avatar)->create('Joko Widodo')->toBase64();
         }
     }
 }

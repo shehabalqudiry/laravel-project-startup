@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MasterData\Branch\Database\Seeders;
+namespace Modules\MasterData\Database\Seeders;
 
 use Modules\MasterData\App\Models\Permission;
 use Illuminate\Database\Seeder;

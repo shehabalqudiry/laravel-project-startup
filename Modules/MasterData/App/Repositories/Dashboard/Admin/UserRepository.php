@@ -15,13 +15,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserRepository implements UserInterface
 {
-    public function __construct(protected User $model) {
-
-    }
+    public function __construct(protected User $model) {}
 
 
 
-    public function index($request): \Illuminate\Http\JsonResponse
+    public function getAllUsers($request): \Illuminate\Http\JsonResponse
     {
         $perPage = $request['per_page'] ?? config('myConfig.paginationCount');
         $collection = $this->model->orderBy('created_at', 'desc');

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\MasterData\Database\Seeders\MasterDataDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin'),
+        $this->call([
+            MasterDataDatabaseSeeder::class,
         ]);
+
     }
 }

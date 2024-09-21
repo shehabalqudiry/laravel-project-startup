@@ -5,7 +5,7 @@ namespace Modules\MasterData\App\Repositories\Dashboard\Admin;
 interface UserInterface
 {
 
-    public function index($request );
+    public function getAllUsers($request);
 
     public function store($request);
     public function show($user);

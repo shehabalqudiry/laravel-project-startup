@@ -2,35 +2,29 @@
 
 namespace Modules\MasterData\App\Services\Dashboard;
 
-use App\Models\User;
-use App\Repositories\User\UserRepositoryInterface;
+use Modules\MasterData\App\Models\User;
+use Modules\MasterData\App\Repositories\Dashboard\Admin\UserInterface;
 
 class UserService
 {
-    public function __construct(protected UserRepositoryInterface $userRepository){}
+    public function __construct(protected UserInterface $userRepository){}
 
-    public function create(array $data)
+    public function getAllUsers($request)
     {
-        return $this->userRepository->create($data);
+        return $this->userRepository->getAllUsers($request);
     }
 
-    public function update(array $data, $id)
+    public function store($request)
+    { 
+        return $this->userRepository->store($request);
+    }
+    public function update($user, $request)
     {
-        return $this->userRepository->update($data, $id);
+        return $this->userRepository->update($user, $request);
     }
 
-    public function delete($id)
+    public function destroy($user)
     {
-        return $this->userRepository->delete($id);
-    }
-
-    public function all($request)
-    {
-        return $this->userRepository->all($request);
-    }
-
-    public function find($id)
-    {
-        return $this->userRepository->find($id);
+        return $this->userRepository->destroy($user);
     }
 }

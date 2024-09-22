@@ -15,7 +15,7 @@ class UserService
     }
 
     public function store($request)
-    { 
+    {
         return $this->userRepository->store($request);
     }
     public function update($user, $request)

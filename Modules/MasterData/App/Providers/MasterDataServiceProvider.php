@@ -5,7 +5,6 @@ namespace Modules\MasterData\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Hexadog\MenusManager\Facades\Menus;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\User\UserRepository;
 use app\Repositories\User\UserRepositoryInterface;
 use Closure;
 use Modules\MasterData\App\Models\User;
@@ -19,6 +18,8 @@ use Modules\MasterData\App\Repositories\Dashboard\ActivityLogs\ActivityLogInterf
 use Modules\MasterData\App\Repositories\Dashboard\ActivityLogs\ActivityLogRepository;
 use Modules\MasterData\App\Repositories\Dashboard\AdditionalData\AdditionalDataInterface;
 use Modules\MasterData\App\Repositories\Dashboard\AdditionalData\AdditionalDataRepository;
+use Modules\MasterData\App\Repositories\Dashboard\Admin\UserInterface;
+use Modules\MasterData\App\Repositories\Dashboard\Admin\UserRepository;
 use Modules\MasterData\App\Repositories\Dashboard\Area\AreaInterface;
 use Modules\MasterData\App\Repositories\Dashboard\Area\AreaRepository;
 use Modules\MasterData\App\Repositories\Dashboard\Branch\BranchInterface;
@@ -58,7 +59,7 @@ class MasterDataServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/migrations'));
-        
+
     }
 
     /**
@@ -72,6 +73,11 @@ class MasterDataServiceProvider extends ServiceProvider
         app()->bind(ActivityLogInterface::class, ActivityLogRepository::class);
         app()->bind(ActivityLogService::class, function ($app) {
             return new ActivityLogService($app->make(ActivityLogInterface::class));
+        });
+
+        app()->bind(UserInterface::class, UserRepository::class);
+        app()->bind(UserService::class, function ($app) {
+            return new UserService($app->make(UserInterface::class));
         });
 
         app()->bind(AdditionalDataInterface::class, AdditionalDataRepository::class);

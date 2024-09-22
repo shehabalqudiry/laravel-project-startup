@@ -9,8 +9,8 @@ use Illuminate\Http\Response;
 use Modules\MasterData\Admin\App\Http\Requests\StoreRequest;
 use Modules\MasterData\Admin\App\Http\Requests\UpdateRequest;
 use Modules\MasterData\Admin\App\Models\User;
-use Modules\MasterData\Admin\App\Repositories\UserInterface;
-use Modules\MasterData\Admin\App\Filters\AdminFilter;
+use Modules\MasterData\App\Filters\AdminFilters;
+use Modules\MasterData\App\Repositories\Dashboard\Admin\UserInterface;
 class UserController extends Controller
 {
     protected $user;
@@ -20,7 +20,7 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function index(Request $request, AdminFilter $filter)
+    public function index(Request $request, AdminFilters $filter)
     {
         return $this->user->index($request, $filter);
     }

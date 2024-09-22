@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Apis\Users\UserController;
+
 use Illuminate\Support\Facades\Route;
 
-use Modules\MasterData\App\Http\Controllers\Dashboard\AdditionalDataController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\AreaController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\AuthController;
-use Modules\MasterData\App\Http\Controllers\Dashboard\BranchController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\CityController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\UserController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\BranchController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\ClientController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\CountryController;
-use Modules\MasterData\App\Http\Controllers\Dashboard\CurrencyController;
-use Modules\MasterData\App\Http\Controllers\Dashboard\CustomFieldController;
-use Modules\MasterData\App\Http\Controllers\Dashboard\ActivityLogController;
-use Modules\MasterData\App\Http\Controllers\Dashboard\DepartmentController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\SettingController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CurrencyController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\DepartmentController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\ActivityLogController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\CustomFieldController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\AdditionalDataController;
 
 /*
 |--------------------------------------------------------------------------

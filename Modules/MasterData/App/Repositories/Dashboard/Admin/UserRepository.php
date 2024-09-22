@@ -33,35 +33,106 @@ class UserRepository implements UserInterface
             "id" => 'ID',
             "name" => 'Name',
             "email" => 'Email',
-
         ];
-        $modalInputs = [
-            "id" => 'ID',
-            "name" => 'Name',
-            "email" => 'Email',
 
-        ];
         $actions = [
             // "edit" => ["label" => "Edit", "class" => 'btn btn-outline-primary', "href" => "#", "action_route" => 'activitylog.update'],
             "show" => ["label" => "Show", "class" => 'btn btn-outline-info', "href" => "#", "action_route" => 'user.show'],
             // "delete" => ["label" => "Delete", "class" => 'btn btn-outline-danger', "href" => "#", "action_route" => 'activitylog.destroy'],
         ];
         $headerButtons = [
-            // "add" => "<button type='button' class='btn btn-outline-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
+            "add" => "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
         ];
 
+        $modalInputs = [
+            [
+                "modalId" => "AddModal",
+                "formOptions" => "action=" . route('user.store') . " method=POST enctype=multipart/form-data",
+                "data" => [
+                    [
+                        "tagtype" => "input",
+                        "label" => "Name",
+                        "type" => "text",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ],
 
+                    [
+                        "tagtype" => "input",
+                        "label" => "Email",
+                        "type" => "email",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('email')",
+                    ],
+
+                    [
+                        "tagtype" => "button",
+                        "label" => "Add New",
+                        "type" => "submit",
+                        "isButton" => true,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ],
+                ]
+            ]
+        ];
+        $modalInputsUpdate = [
+            [
+                "modalId" => "UpdateModal",
+                "formOptions" => "method=POST enctype=multipart/form-data",
+                "route" => 'user.update',
+                "relation" => "colorproduct",
+                "data" => [
+                    [
+                        "tagtype" => "input",
+                        "label" => "Name",
+                        "type" => "text",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('name')",
+                    ],
+
+                    [
+                        "tagtype" => "input",
+                        "label" => "Email",
+                        "type" => "email",
+                        "isButton" => false,
+                        "name" => "name",
+                        "value" => "old('email')",
+                    ],
+                    [
+                        "tagtype" => "button",
+                        "label" => "Update User",
+                        "type" => "submit",
+                        "isButton" => true,
+                        "name" => "buttonupdate",
+                        "value" => "old('button')",
+                    ],
+                ]
+            ]
+        ];
+        $modaldelete = [
+            "modalId" => "DeleteModal",
+            "formOptions" => "method=POST",
+            "route" => 'user.destroy',
+        ];
 
         $options = [
             'isView' => true,
             'view' => 'masterdata::index',
             'columns' => $columns,
-            'modalInputs' => $modalInputs,
+            'updateRoute' => 'user.update',
+            'deleteRoute' => 'user.destroy',
             'actions' => $actions,
-            'page_title' => __('Admins'),
+            'page_title' => __('User Data'),
             'headerButtons'   => $headerButtons,
+            'modalInputs'   => $modalInputs,
+            'modalInputsUpdate' => $modalInputsUpdate,
+            'modaldelete' => $modaldelete
         ];
-        return responseSuccess($data, __('Admins'), options: $options);
+        return responseSuccess($data, __('User Data'), options: $options);
     }
 
     public function store($request)

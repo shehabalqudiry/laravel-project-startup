@@ -21,7 +21,7 @@
             @endforeach
         </div>
     @endif
-    <div class="card shadow">
+    <div class="shadow card">
         <div class="card-header">
             @if (in_array('headerButtons', $options))
                 @foreach ($options['headerButtons'] as $button)
@@ -79,6 +79,7 @@
                             @foreach ($modalInput['data'] as $key => $input)
                                 <div class="form-group">
                                     @if (!$input['isButton'])
+                                    {{-- @dd($input) --}}
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         <input type="{{ $input['type'] }}" class="form-control"
                                             value="{{ old($input['name']) }}" id="{{ $input['name'] }}"

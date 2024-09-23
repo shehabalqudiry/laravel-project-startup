@@ -89,10 +89,10 @@ class RoleController extends Controller
 
                     [
                         "tagtype" => "input",
-                        "label" => "Email",
-                        "type" => "email",
+                        "label" => "Display Name",
+                        "type" => "text",
                         "isButton" => false,
-                        "name" => "name",
+                        "name" => "display_name",
                         "value" => "old('email')",
                     ],
                     [
@@ -131,22 +131,37 @@ class RoleController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->role_and_permission->createRole($request);
-        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
+        $data = $this->role_and_permission->createRole($request);
+        if ($data['status'] == true) {
+            return redirect()->route('roles.index')->with('success', 'Role created successfully.');
+        }
+        return redirect()->route('roles.index')->with('error', 'an error on create.');
     }
 
     public function show(Role $role)
     {
-        return $this->role_and_permission->showRole($role);
+        $data = $this->role_and_permission->showRole($role);
+        if ($data['status'] == true) {
+            return redirect()->route('roles.show');
+        }
+        return redirect()->route('roles.index')->with('error', "Role Not Found");
     }
 
     public function update(Role $role, UpdateRequest $request)
     {
-        return $this->role_and_permission->updateRole($role, $request);
+        $data = $this->role_and_permission->updateRole($role, $request);
+        if ($data['status'] == true) {
+            return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
+        }
+        return redirect()->route('roles.index')->with('error', 'an error on update.');
     }
 
     public function destroy(Role $role)
     {
-        return $this->role_and_permission->destroy($role);
+        $data = $this->role_and_permission->destroy($role);
+        if ($data['status'] == true) {
+            return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
+        }
+        return redirect()->route('roles.index')->with('error', 'Role not found');
     }
 }

@@ -72,7 +72,7 @@
     <div class="modal fade" id="{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-info text-white">
+                <div class="modal-header  text-white">
                     <h5 class="modal-title" id="modalLabel">{{ __('Details') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

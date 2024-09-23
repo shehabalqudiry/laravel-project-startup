@@ -33,7 +33,7 @@
             </div>
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-danger font-2" />
         </div>
-        
+
         <button class="btn btn-block btn-primary shadow-md mt-2" type="submit">{{ __('Save') }}</button>
         <div class="flex items-center mt-3">
             @if (session('status') === 'profile-updated')
@@ -42,7 +42,7 @@
                         <i class="bi bi-check-circle"></i>
                         {{ __('Profile updated successfully') }}
                     </p>
-                    <button type="button" class="btn-close text-danger" data-bs-dismiss="alert"
+                    <button type="button" class="btn-close text-danger" data-bs-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
             @endif

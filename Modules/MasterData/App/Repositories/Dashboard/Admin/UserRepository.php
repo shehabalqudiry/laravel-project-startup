@@ -41,12 +41,13 @@ class UserRepository implements UserInterface
             // "delete" => ["label" => "Delete", "class" => 'btn btn-outline-danger', "href" => "#", "action_route" => 'activitylog.destroy'],
         ];
         $headerButtons = [
-            "add" => "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
+            "add" => "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#AddModal'>Add</button>",
         ];
 
         $modalInputs = [
             [
                 "modalId" => "AddModal",
+                "modalName" => "AddModal",
                 "formOptions" => "action=" . route('user.store') . " method=POST enctype=multipart/form-data",
                 "data" => [
                     [

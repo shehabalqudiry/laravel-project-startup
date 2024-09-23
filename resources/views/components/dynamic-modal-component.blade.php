@@ -11,7 +11,7 @@
                         @endisset
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
@@ -29,7 +29,7 @@
                             @endforeach
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}
+                            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">{{ __('Close') }}
                                 </ button>
                                 @foreach ($modalInput['data'] as $key => $input)
                                     @if ($input['isButton'])
@@ -52,7 +52,7 @@
                         @method('DELETE')
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
@@ -60,7 +60,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}
+                            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">{{ __('Close') }}
                                 </ button>
                                 <button type="submit" class="btn btn-outline-danger">{{ __('Submit') }}</button>
                         </div>
@@ -69,33 +69,30 @@
             </div>
         </div>
     @elseif(str_contains($modal_id, 'modal-show'))
-        <div class="modal fade" id="{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <tbody>
-                                @foreach ($columns as $columnKey => $col)
-                                    <tr class="d-flex justify-content-between">
-                                        <th>{{ $col }}</th>
-                                        <td>: {{ $item->{$columnKey} }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{ __('Close') }}</
-                                button>
-                    </div>
+    <div class="modal fade" id="{{ $modal_id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="modalLabel">{{ __('Details') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                            @foreach ($columns as $columnKey => $col)
+                                <tr>
+                                    <th class="text-start">{{ $col }}</th>
+                                    <td class="text-start">{{ $item->{$columnKey} }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
                 </div>
             </div>
         </div>
+    </div>
     @endif
 @endforeach

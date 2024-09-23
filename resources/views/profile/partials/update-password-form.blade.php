@@ -84,7 +84,7 @@
             </div>
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2 text-danger font-2" />
         </div>
-        
+
         <button class="btn btn-primary btn-block shadow-md mt-2" type="submit">{{ __('Save') }}</button>
         <div class="flex items-center mt-3">
             @if (session('status') === 'password-updated')
@@ -93,7 +93,7 @@
                         <i class="bi bi-check-circle"></i>
                         {{ __('Password updated successfully') }}
                     </p>
-                    <button type="button" class="btn-close text-danger" data-bs-dismiss="alert"
+                    <button type="button" class="btn-close text-danger" data-bs-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
             @endif

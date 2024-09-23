@@ -49,7 +49,7 @@ class SettingRepository implements SettingInterface
             // "delete" => ["label" => "Delete", "class" => 'btn btn-outline-danger', "href" => "#", "action_route" => 'activitylog.destroy'],
         ];
         $headerButtons = [
-            // "add" => "<button type='button' class='btn btn-outline-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
+            // "add" => "<button type='button' class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#AddModal'>Add</button>",
         ];
 
 

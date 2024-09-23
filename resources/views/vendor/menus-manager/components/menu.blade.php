@@ -51,7 +51,7 @@
             </ul>
         </div>
         <button class="sidebar-toggler btn x">
-            <i data-feather="x"></i>
+            <i data-bs-feather="x"></i>
         </button>
     </div>
 </div>

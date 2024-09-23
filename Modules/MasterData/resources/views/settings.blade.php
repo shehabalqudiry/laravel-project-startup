@@ -26,7 +26,7 @@
                 @foreach ($data as $tab)
                     <li class="nav-item">
                         <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="tab-{{ $loop->iteration }}"
-                            data-toggle="tab" href="#tab_{{ $loop->iteration }}" role="tab"
+                            data-bs-toggle="tab" href="#tab_{{ $loop->iteration }}" role="tab"
                             aria-controls="{{ $tab->title }}" aria-selected="true">{{ $tab->title }}</a>
                     </li>
                 @endforeach
@@ -37,7 +37,7 @@
                         <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}" id="tab_{{ $loop->iteration }}"
                             role="tabpanel" aria-labelledby="tab_{{ $loop->iteration }}-tab">
                             <div class="form-row">
-                                @foreach ($item->data->resource as $data_item)
+                                @foreach ($item->data-bs->resource as $data_item)
                                     <div class="form-group col-md-6">
                                         <label
                                             for="item{{ $loop->iteration }}">{{ ucwords(str_replace(['_', '-'], ' ', $data_item->key)) }}</label>

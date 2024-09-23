@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('theme-content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     @if (in_array('page_title', $options))
         <h1 class="page-title">{{ $options['page_title'] }}</h1>
     @endif
@@ -71,15 +72,14 @@
                 <div class="modal-content">
                     <form {{ $modalInput['formOptions'] }}>
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            <h5 class="modal-title" id="modalLabel"> {{ $modalInput['modalName'] }} </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
                             @foreach ($modalInput['data'] as $key => $input)
                                 <div class="form-group">
                                     @if (!$input['isButton'])
-                                    {{-- @dd($input) --}}
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         <input type="{{ $input['type'] }}" class="form-control"
                                             value="{{ old($input['name']) }}" id="{{ $input['name'] }}"
@@ -89,7 +89,7 @@
                             @endforeach
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</ button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</ button>
                                 @foreach ($modalInput['data'] as $key => $input)
                                     @if ($input['isButton'])
                                         <button type="{{ $input['type'] }}"

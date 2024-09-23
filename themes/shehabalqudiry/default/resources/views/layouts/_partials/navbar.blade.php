@@ -4,24 +4,24 @@
     </button>
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="dark">
+            <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-bs-mode="dark">
                 <i class="fe fe-sun fe-16"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
+            <a class="nav-link text-muted my-2" href="./#" data-bs-toggle="modal" data-bs-target=".modal-shortcut">
                 <span class="fe fe-grid fe-16"></span>
             </a>
         </li>
         <li class="nav-item nav-notif">
-            <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+            <a class="nav-link text-muted my-2" href="./#" data-bs-toggle="modal" data-bs-target=".modal-notif">
                 <span class="fe fe-bell fe-16"></span>
                 <span class="dot dot-md bg-success"></span>
             </a>
         </li>
         <div class="dropdown">
             <a href="#" class="dropdown-toggle" type="button" id="dropdownMenuButtonEmoji"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                data-bs-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="me-50">
                     {{--  <i class="rounded-circle bi bi-person"></i>  --}}
                     {{--  image   --}}

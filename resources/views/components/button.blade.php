@@ -3,10 +3,6 @@
         {{ $slot }}
     </button>
 
-
-
-
-
     {{-- make modal bootstrap 4 for edit --}}
     @foreach ($options['modalInputsUpdate'] as $modalInputupdate)
         <div class="modal fade" id="UpdateModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
@@ -56,7 +52,7 @@
                                             @php
                                                 $name = explode('_',$input['name']);
                                             @endphp
-                                            <input type="{{ $input['type'] }}" class="form-control" value={{ $item->getTranslation($name[0],'ar') }}
+                                            <input type="{{ $input['type'] }}" class="form-control" value="{{ $item->getTranslation($name[0],'ar') }}"
                                             name="{{ $input['name'] }}">
                                         @elseif ($input['name'] == "images[]")
                                             <small class="form-control form-text text-muted">Please upload exactly more
@@ -64,7 +60,7 @@
                                             <input type="file" class="form-control" id="images"
                                                 name="{{ $input['name'] }}" multiple>
                                         @else
-                                            <input type="{{ $input['type'] }}" class="form-control" value={{ $item->{$input['name']} }}
+                                            <input type="{{ $input['type'] }}" class="form-control" value="{{ $item->{$input['name']} }}"
                                             name="{{ $input['name'] }}">
                                         @endif
                                     {{-- multible --}}
@@ -76,7 +72,7 @@
                                     @elseif ($input['tagtype'] == 'select' and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         <select class="form-control " id="{{ $input['name'] }}" name="{{ $input['name'] }}">
-                                            <option value={{ $item->{$input['name']} }}>Current Value</option>
+                                            <option value="{{ $item->{$input['name']} }}">Current Value</option>
                                             @foreach ($input['optionsdata'] as $itemlist )
                                             <option value="{{ $itemlist->id }}">{{ $itemlist->name }}</option>
                                             @endforeach

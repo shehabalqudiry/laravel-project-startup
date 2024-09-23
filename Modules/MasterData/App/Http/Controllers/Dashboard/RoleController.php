@@ -89,10 +89,10 @@ class RoleController extends Controller
 
                     [
                         "tagtype" => "input",
-                        "label" => "Email",
-                        "type" => "email",
+                        "label" => "Display Name",
+                        "type" => "text",
                         "isButton" => false,
-                        "name" => "name",
+                        "name" => "display_name",
                         "value" => "old('email')",
                     ],
                     [

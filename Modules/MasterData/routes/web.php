@@ -16,6 +16,7 @@ use Modules\MasterData\App\Http\Controllers\Dashboard\DepartmentController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\ActivityLogController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\CustomFieldController;
 use Modules\MasterData\App\Http\Controllers\Dashboard\AdditionalDataController;
+use Modules\MasterData\App\Http\Controllers\Dashboard\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,8 @@ Route::group(['middleware' => 'theme:default'], function () {
 
     // admin config
     Route::resource('user', UserController::class)->names('user');
-    Route::resource('auth', AuthController::class)->names('auth');
+    Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+    Route::resource('roles', RoleController::class)->names('roles');
 
     // company config
     Route::resource('branch', BranchController::class)->names('branch');

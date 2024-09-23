@@ -15,7 +15,7 @@ Route::middleware('auth','theme:default')->prefix('admin')->name('admin.')->grou
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-
+    
 Route::middleware(['theme:default'])->prefix('admin')->name('admin.')->group(function () {
     require __DIR__.'/auth.php';
 });

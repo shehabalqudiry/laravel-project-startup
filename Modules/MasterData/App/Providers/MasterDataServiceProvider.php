@@ -34,6 +34,10 @@ use Modules\MasterData\App\Repositories\Dashboard\Currency\CurrencyInterface;
 use Modules\MasterData\App\Repositories\Dashboard\Currency\CurrencyRepository;
 use Modules\MasterData\App\Repositories\Dashboard\Department\DepartmentInterface;
 use Modules\MasterData\App\Repositories\Dashboard\Department\DepartmentRepository;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\PermissionInterface;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\PermissionRepository;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\RoleInterface;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\RoleRepository;
 use Modules\MasterData\App\Services\Dashboard\AreaService;
 use Modules\MasterData\App\Services\Dashboard\BranchService;
 use Modules\MasterData\App\Services\Dashboard\CityService;
@@ -41,6 +45,7 @@ use Modules\MasterData\App\Services\Dashboard\ClientService;
 use Modules\MasterData\App\Services\Dashboard\CountryService;
 use Modules\MasterData\App\Services\Dashboard\CurrencyService;
 use Modules\MasterData\App\Services\Dashboard\DepartmentService;
+use Modules\MasterData\App\Services\Dashboard\RoleAndPermissionService;
 
 class MasterDataServiceProvider extends ServiceProvider
 {
@@ -78,6 +83,12 @@ class MasterDataServiceProvider extends ServiceProvider
         app()->bind(UserInterface::class, UserRepository::class);
         app()->bind(UserService::class, function ($app) {
             return new UserService($app->make(UserInterface::class));
+        });
+
+        app()->bind(RoleInterface::class, RoleRepository::class);
+        app()->bind(PermissionInterface::class, PermissionRepository::class);
+        app()->bind(RoleAndPermissionService::class, function ($app) {
+            return new RoleAndPermissionService($app->make(RoleInterface::class), $app->make(PermissionInterface::class));
         });
 
         app()->bind(AdditionalDataInterface::class, AdditionalDataRepository::class);

@@ -48,14 +48,22 @@
                                 <td>{{ $item->{$columnKey} }}</td>
                             @endforeach
 
-                            @if ($options['actions'] != [])
+                            {{--  @if ($options['actions'] != [])
                                 <td>
                                     @foreach ($options['actions'] as $actionKey => $action)
                                         <x-table-action-button-component :b_text="$action['label']" :b_class="$action['class']"
-                                            :b_href="$action['href']" :modal_id="'modal-' . $actionKey . '-' . $item->id" :options="$options" :action="'action=' . route($action['action_route'], $item->id)" :item="$item" :columns="$options['columns']"></x-table-action-button-component>
+                                            :b_href="$action['href']" :modal_id="'modal-' . $actionKey . '-' . $item->id" :options="$options" :action="'action=' . route($options['deleteRoute'], $item->id)"
+                                            :item="$item" :columns="$options['columns']"></x-table-action-button-component>
                                     @endforeach
                                 </td>
-                            @endif
+                            @endif  --}}
+                            <td>
+                                <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
+                                </x-button>
+                                <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
+                                    :options="$options">Delete
+                                </x-button-delete>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -70,6 +78,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <form {{ $modalInput['formOptions'] }}>
+                        @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel">{{ $modalInput['modalName'] }}</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
@@ -86,16 +95,112 @@
                                     @endif
                                 </div>
                             @endforeach
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</ button>
-                                @foreach ($modalInput['data'] as $key => $input)
-                                    @if ($input['isButton'])
-                                        <button type="{{ $input['type'] }}"
-                                            class="btn btn-outline-primary">{{ $input['label'] }}</button>
-                                    @endif
-                                @endforeach
-                        </div>
+                            <div class="form-group">
+                                <div class="col-12 p-2">
+
+
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr style="">
+                                                <th>الجدول</th>
+                                                <th style="width: 56px;">اضافة</th>
+                                                <th style="width: 56px;">عرض</th>
+                                                <th style="width: 56px;">تعديل</th>
+                                                <th style="width: 56px;">حذف</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($options['permissions'] as $permission)
+                                                @php
+                                                    $sub_permissions = \Spatie\Permission\Models\Permission::where(
+                                                        'module',
+                                                        $permission->module,
+                                                    )->get();
+                                                @endphp
+                                                <tr>
+
+
+
+                                                    <td>{{ $permission->module }}</td>
+
+                                                    @if ($sub_permissions->where('name', 'create-' . $permission->module)->first())
+                                                        <td style="width: 56px;">
+
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="{{ 'create-' . $permission->module }}"
+                                                                    value="{{ 'create-' . $permission->module }}"
+                                                                    @if (isset($role) && $role->hasPermissionTo('create-' . $permission->module)) checked @endif
+                                                                    name="permissions[]">
+                                                            </div>
+                                                        </td>
+                                                    @else
+                                                        <td style="width: 56px;">
+                                                        </td>
+                                                    @endif
+                                                    @if ($sub_permissions->where('name', 'read-' . $permission->module)->first())
+                                                        <td style="width: 56px;">
+
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="{{ 'read-' . $permission->module }}"
+                                                                    value="{{ 'read-' . $permission->module }}"
+                                                                    @if (isset($role) && $role->hasPermissionTo('read-' . $permission->module)) checked @endif
+                                                                    name="permissions[]">
+                                                            </div>
+                                                        </td>
+                                                    @else
+                                                        <td style="width: 56px;">
+                                                        </td>
+                                                    @endif
+                                                    @if ($sub_permissions->where('name', 'update-' . $permission->module)->first())
+                                                        <td style="width: 56px;">
+
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" id="flexSwitchCheckChecked"
+                                                                    type="checkbox"
+                                                                    id="{{ 'update-' . $permission->module }}"
+                                                                    value="{{ 'update-' . $permission->module }}"
+                                                                    @if (isset($role) && $role->hasPermissionTo('update-' . $permission->module)) checked @endif
+                                                                    name="permissions[]">
+                                                            </div>
+                                                        </td>
+                                                    @else
+                                                        <td style="width: 56px;">
+                                                        </td>
+                                                    @endif
+                                                    @if ($sub_permissions->where('name', 'delete-' . $permission->module)->first())
+                                                        <td style="width: 56px;">
+
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="{{ 'delete-' . $permission->module }}"
+                                                                    value="{{ 'delete-' . $permission->module }}"
+                                                                    @if (isset($role) && $role->hasPermissionTo('delete-' . $permission->module)) checked @endif
+                                                                    name="permissions[]">
+                                                            </div>
+                                                        </td>
+                                                    @else
+                                                        <td style="width: 56px;">
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</
+                                        button>
+                                    @foreach ($modalInput['data'] as $key => $input)
+                                        @if ($input['isButton'])
+                                            <button type="{{ $input['type'] }}"
+                                                class="btn btn-outline-primary">{{ $input['label'] }}</button>
+                                        @endif
+                                    @endforeach
+                            </div>
                     </form>
                 </div>
             </div>

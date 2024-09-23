@@ -64,6 +64,12 @@ use Spatie\Permission\Models\Role;
         ->icon('bi bi-person-fill-lock fe-16') // User check icon
         ->if(fn() => $user?->can('read-user'));
 
+    // Roles Config
+    $masterMenu
+        ->route('roles.index', fn() => __('Roles'))
+        ->icon('bi bi-person-fill-lock fe-16') // User check icon
+        ->if(fn() => $user?->can('read-user'));
+
     // Company Config
     $masterMenu
         ->route('branch.index', fn() => __('Branches'))

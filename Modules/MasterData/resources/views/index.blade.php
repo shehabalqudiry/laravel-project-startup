@@ -49,14 +49,11 @@
                                 <td>{!! $item->{$columnKey} !!}</td>
                             @endforeach
 
-                            @if ($options['actions'] != [])
-                                <td>
-                                    @foreach ($options['actions'] as $actionKey => $action)
-                                        <x-table-action-button-component :b_text="$action['label']" :b_class="$action['class']"
-                                            :b_href="$action['href']" :modal_id="'modal-' . $actionKey . '-' . $item->id" :options="$options" :action="'action=' . route($action['action_route'], $item->id)" :item="$item" :columns="$options['columns']"></x-table-action-button-component>
-                                    @endforeach
-                                </td>
-                            @endif
+                            <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
+                            </x-button>
+                            <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
+                                :options="$options">Delete
+                            </x-button-delete>
                         </tr>
 
 

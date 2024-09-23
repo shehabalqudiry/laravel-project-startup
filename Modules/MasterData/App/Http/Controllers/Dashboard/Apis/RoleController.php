@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\MasterData\App\Models\Role;
+use Modules\MasterData\App\Repositories\Dashboard\RoleAndPermission\RoleInterface;
 use Modules\MasterData\RoleAndPermission\App\Http\Requests\Role\StoreRequest;
 use Modules\MasterData\RoleAndPermission\App\Http\Requests\Role\UpdateRequest;
-use Modules\MasterData\RoleAndPermission\App\Models\Role;
-use Modules\MasterData\RoleAndPermission\App\Repositories\RoleInterface;
 
 class RoleController extends Controller
 {
@@ -22,14 +22,15 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
-        return $this->role->index($request);
+        $roles = $this->role->index($request);
+        return responseSuccess($roles['data'],options:['isView' => true, 'view' => "masterdata::roles.index", "page_title" => "Roles"]);
     }
 
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         return $this->role->store($request);
     }
@@ -47,7 +48,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Role $role , UpdateRequest $request)
+    public function update(Role $role , Request $request)
     {
         return $this->role->update($role , $request);
     }

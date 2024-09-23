@@ -157,7 +157,7 @@ class UserRepository implements UserInterface
                         "placeholder" => __("Please Enter Password"),
                         "isButton" => false,
                         "name" => "password",
-                        "value" => "old('password')",
+                        // "value" => "old('password')",
                     ],
                     [
                         "tagtype" => "button",

@@ -52,6 +52,7 @@
 
         <script src="{{ theme_asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
         <script src="{{ theme_asset('assets/js/pages/dashboard.js') }}"></script>
+        @yield('scripts')
         {{--  <script>
         window.dataLayer = window.dataLayer || [];
 

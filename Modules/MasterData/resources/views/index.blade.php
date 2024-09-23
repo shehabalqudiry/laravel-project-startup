@@ -46,7 +46,7 @@
                     @foreach ($data as $item)
                         <tr>
                             @foreach ($options['columns'] as $columnKey => $column)
-                                <td>{{ $item->{$columnKey} }}</td>
+                                <td>{!! $item->{$columnKey} !!}</td>
                             @endforeach
 
                             @if ($options['actions'] != [])
@@ -58,6 +58,76 @@
                                 </td>
                             @endif
                         </tr>
+
+
+                        @foreach ($options['actions'] as $actionKey => $action)
+                            {{-- Edit Modal --}}
+                            @if ($actionKey === 'edit')
+                                <div class="modal fade" id="modal-edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form action="{{ route($action['action_route'], $item->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT') {{-- Use PUT for updates --}}
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ __('Edit User') }}</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @foreach ($options['modalInputsUpdate'][0]['data'] as $input)
+                                                        <div class="form-group">
+                                                            @if (!$input['isButton'])
+                                                                <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
+                                                                <input type="{{ $input['type'] }}" class="form-control"
+                                                                    name="{{ $input['name'] }}" id="{{ $input['name'] }}"
+                                                                    value="{{ old($input['name'], $item->{$input['name']} ?? '') }}">
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                                    <button type="submit" class="btn btn-outline-success">{{ __('Update User') }}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            {{-- Delete Modal --}}
+                            @if ($actionKey === 'delete')
+                                <div class="modal fade" id="modal-delete-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form action="{{ route($action['action_route'], $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE') {{-- Use DELETE for deletion --}}
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ __('Delete User') }}</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>{{ __('Are you sure you want to delete this item?') }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                                    <button type="submit" class="btn btn-outline-danger">{{ __('Delete') }}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+
                     @endforeach
                 </tbody>
             </table>
@@ -79,24 +149,33 @@
                         </div>
                         <div class="modal-body">
                             @foreach ($modalInput['data'] as $key => $input)
+                                @if( $input['type'] == 'checkbox')
+                                <div class="form-check form-switch">
+                                    <div class="form-check">
+                                        <label for="" class="@if( $input['type'] == 'checkbox') form-check-label @endif">{{ $input['label'] }}</label>
+                                        <input name="{{ $input['name'] }}" hidden value="0">
+                                        <input class="form-check-input " type="checkbox" checked="true" name="{{ $input['name'] }}" id="{{ $key }}" value="1" >
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="form-group">
                                     {{-- normal input --}}
-                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea']) and !$input['isButton'])
-                                        <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
+                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea', 'checkbox']) and !$input['isButton'])
+                                        <label for="{{ $input['name'] }}"  class="form-label">{{ $input['label'] }}</label>
                                         @if ($input['name'] == 'images[]')
                                             <small class="form-control form-text text-muted">Please upload exactly more
                                                 one images.</small>
                                             <input type="file" class="form-control" id="images"
-                                                name="{{ $input['name'] }}" multiple>
+                                                name="{{ $input['name'] }}" {{ $input['required'] }} multiple>
                                         @else
-                                            <input type="{{ $input['type'] }}" class="form-control"
+                                            <input type="{{ $input['type'] }}" class="form-control {{ $input['additional_class'] ?? '' }}"
                                                 value="{{ old($input['name']) }}" id="{{ $input['name'] }}"
-                                                name="{{ $input['name'] }}">
+                                                name="{{ $input['name'] }}" {{ $input['required'] }} placeholder="{{ $input['placeholder'] }}">
                                         @endif
                                         {{-- multiple --}}
                                     @elseif ($input['tagtype'] == 'select' and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
-                                        <select class="form-control " value="{{ old($input['name']) }}"
+                                        <select class="form-control " value="{{ old($input['name']) }}" {{ $input['required'] }}
                                             id="{{ $input['name'] }}" name="{{ $input['name'] }}">
                                             @foreach ($input['optionsdata'] as $itemlist)
                                                 <option value="{{ $itemlist->id }}">{{ $itemlist->name }}</option>
@@ -105,7 +184,7 @@
                                         {{-- textarea --}}
                                     @elseif ($input['tagtype'] == 'textarea' and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
-                                        <textarea class="form-control" id="textarea" name="{{ $input['name'] }}" cols="12" rows="6">{{ old($input['name']) }}</textarea>
+                                        <textarea class="form-control" {{ $input['required'] }} id="textarea" name="{{ $input['name'] }}" cols="12" rows="6">{{ old($input['name']) }}</textarea>
                                     @endif
                                 </div>
                             @endforeach
@@ -125,4 +204,19 @@
         </div>
     @endforeach
 
+
+
+
+
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if ($errors->any())
+                var modal = new bootstrap.Modal(document.getElementById('AddModal'), {});
+                modal.show();
+            @endif
+        });
+    </script>
 @endsection

@@ -82,7 +82,7 @@
                             @foreach ($columns as $columnKey => $col)
                                 <tr>
                                     <th class="text-start">{{ $col }}</th>
-                                    <td class="text-start">{{ $item->{$columnKey} }}</td>
+                                    <td class="text-start">{!! $item->{$columnKey} !!}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\MasterData\App\Http\Requests\Dashboard\Users\StoreRequest;
-use Modules\MasterData\App\Http\Requests\Dashboard\Users\UpdateRequest;
-use Modules\MasterData\Admin\App\Models\User;
+use Modules\MasterData\App\Http\Requests\Dashboard\User\StoreRequest;
+use Modules\MasterData\App\Http\Requests\Dashboard\User\UpdateRequest;
+use Modules\MasterData\App\Models\User;
 use Modules\MasterData\App\Filters\AdminFilters;
 use Modules\MasterData\App\Repositories\Dashboard\Admin\UserInterface;
 class UserController extends Controller

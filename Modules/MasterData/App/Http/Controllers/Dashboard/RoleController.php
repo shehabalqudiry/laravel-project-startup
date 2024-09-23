@@ -42,16 +42,6 @@ class RoleController extends Controller
                 "data" => [
                     [
                         "tagtype" => "input",
-                        "label" => "Name",
-                        "type" => "text",
-                        "required" => "required",
-                        "isButton" => false,
-                        "name" => "name",
-                        "value" => "old('name')",
-                    ],
-
-                    [
-                        "tagtype" => "input",
                         "label" => "Display Name",
                         "type" => "text",
                         "required" => "required",
@@ -78,15 +68,6 @@ class RoleController extends Controller
                 "route" => 'roles.update',
                 "relation" => "colorproduct",
                 "data" => [
-                    [
-                        "tagtype" => "input",
-                        "label" => "Name",
-                        "type" => "text",
-                        "isButton" => false,
-                        "name" => "name",
-                        "value" => "old('name')",
-                    ],
-
                     [
                         "tagtype" => "input",
                         "label" => "Display Name",

@@ -33,7 +33,9 @@ class RoleRepository implements RoleInterface
     public function store($request)
     {
         try {
-            $role = $this->model->create($request->validated());
+            $data = $request->validated();
+            $data['name'] = slug($data['display_name']);
+            $role = $this->model->create($data);
 
             if ($request->permission_ids) {
                 $permissions = Permission::whereIn('id', $request->permission_ids)->pluck('name');
@@ -63,8 +65,10 @@ class RoleRepository implements RoleInterface
     public function update($role, $request)
     {
         try {
+            $data = $request->validated();
+            $data['name'] = str_slug(l($data['display_name']), '_');
 
-            $role->update($request->validated());
+            $role->update($data);
 
             if ($request->permission_ids) {
                 $permissions = Permission::whereIn('id', $request->permission_ids)->pluck('name');

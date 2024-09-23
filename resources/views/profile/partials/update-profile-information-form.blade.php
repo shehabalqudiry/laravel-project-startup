@@ -42,7 +42,7 @@
                         <i class="bi bi-check-circle"></i>
                         {{ __('Profile updated successfully') }}
                     </p>
-                    <button type="button" class="btn-close text-danger" data-bs-bs-dismiss="alert"
+                    <button type="button" class="btn-close text-danger" data-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
             @endif

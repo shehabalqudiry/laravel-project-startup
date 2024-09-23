@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('theme-content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     @if (in_array('page_title', $options))
         <h1 class="page-title">{{ $options['page_title'] }}</h1>
     @endif

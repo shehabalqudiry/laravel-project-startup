@@ -21,7 +21,7 @@
         </li>
         <div class="dropdown">
             <a href="#" class="dropdown-toggle" type="button" id="dropdownMenuButtonEmoji"
-                data-bs-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="me-50">
                     {{--  <i class="rounded-circle bi bi-person"></i>  --}}
                     {{--  image   --}}

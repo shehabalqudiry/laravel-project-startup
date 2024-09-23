@@ -70,7 +70,8 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <form {{ $modalInput['formOptions'] }}>
+                    <form {{ $modalInput['formOptions'] }} >
+                        @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel"> {{ $modalInput['modalName'] }} </h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
@@ -79,11 +80,32 @@
                         <div class="modal-body">
                             @foreach ($modalInput['data'] as $key => $input)
                                 <div class="form-group">
-                                    @if (!$input['isButton'])
+                                    {{-- normal input --}}
+                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea']) and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
-                                        <input type="{{ $input['type'] }}" class="form-control"
-                                            value="{{ old($input['name']) }}" id="{{ $input['name'] }}"
-                                            name="{{ $input['name'] }}">
+                                        @if ($input['name'] == 'images[]')
+                                            <small class="form-control form-text text-muted">Please upload exactly more
+                                                one images.</small>
+                                            <input type="file" class="form-control" id="images"
+                                                name="{{ $input['name'] }}" multiple>
+                                        @else
+                                            <input type="{{ $input['type'] }}" class="form-control"
+                                                value="{{ old($input['name']) }}" id="{{ $input['name'] }}"
+                                                name="{{ $input['name'] }}">
+                                        @endif
+                                        {{-- multiple --}}
+                                    @elseif ($input['tagtype'] == 'select' and !$input['isButton'])
+                                        <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
+                                        <select class="form-control " value="{{ old($input['name']) }}"
+                                            id="{{ $input['name'] }}" name="{{ $input['name'] }}">
+                                            @foreach ($input['optionsdata'] as $itemlist)
+                                                <option value="{{ $itemlist->id }}">{{ $itemlist->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- textarea --}}
+                                    @elseif ($input['tagtype'] == 'textarea' and !$input['isButton'])
+                                        <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
+                                        <textarea class="form-control" id="textarea" name="{{ $input['name'] }}" cols="12" rows="6">{{ old($input['name']) }}</textarea>
                                     @endif
                                 </div>
                             @endforeach

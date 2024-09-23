@@ -66,7 +66,7 @@ class RoleRepository implements RoleInterface
     {
         try {
             $data = $request->validated();
-            $data['name'] = str_slug(l($data['display_name']), '_');
+            $data['name'] = str_slug($data['display_name'], '_');
 
             $role->update($data);
 

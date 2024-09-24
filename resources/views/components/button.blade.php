@@ -1,5 +1,5 @@
 <div class="d-inline">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal{{ $item->id }}">
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#UpdateModal{{ $item->id }}">
         {{ $slot }}
     </button>
 

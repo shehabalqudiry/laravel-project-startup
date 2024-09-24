@@ -48,12 +48,13 @@
                             @foreach ($options['columns'] as $columnKey => $column)
                                 <td>{!! $item->{$columnKey} !!}</td>
                             @endforeach
-
+                            <td>
                             <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
                             </x-button>
                             <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
                                 :options="$options">Delete
                             </x-button-delete>
+                            </td>
                         </tr>
 
 

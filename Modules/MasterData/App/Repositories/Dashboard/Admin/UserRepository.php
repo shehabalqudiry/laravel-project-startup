@@ -110,6 +110,7 @@ class UserRepository implements UserInterface
         $modalInputsUpdate = [
             [
                 "modalId" => "UpdateModal",
+                "modalName"=>"UpdateModal",
                 "formOptions" => "method=POST enctype=multipart/form-data",
                 "route" => 'user.update',
                 "relation" => "colorproduct",

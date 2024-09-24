@@ -108,6 +108,23 @@ class RoleController extends Controller
         ];
         return responseSuccess($data, options: $options);
     }
+    public function edit(Role $role)
+    {
+        $permissions = Permission::groupBy(
+            'module',
+        )->get();
+
+
+        $options = [
+            'isView' => true,
+            'view' => 'masterdata::roles.edit',
+            'permissions' => $permissions,
+            'role' => $role,
+            'updateRoute' => 'roles.update',
+            'page_title' => __('Create New Role'),
+        ];
+        return responseSuccess([], options: $options);
+    }
 
 
     public function store(StoreRequest $request)

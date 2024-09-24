@@ -1,5 +1,5 @@
 <div class="d-inline">
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal{{ $item->id }}">
+    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal{{ $item->id }}">
         {{ $slot }}
     </button>
 

@@ -13,14 +13,26 @@
                         @csrf
                         @method('PATCH')
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel"></h5>
+                            <h5 class="modal-title" id="modalLabel">{{ $modalInputupdate['modalName'] }}</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
                             @foreach ($modalInputupdate['data'] as $key => $input)
                                 {{--  @dd($modalInputupdate['relation'])  --}}
+
+                                @if( $input['type'] == 'checkbox')
+                                <div class="form-check form-switch">
+                                    <div class="form-check">
+                                        <label for="" class="@if( $input['type'] == 'checkbox') form-check-label @endif">{{ $input['label'] }}</label>
+                                        <input name="{{ $input['name'] }}" hidden value="0">
+                                        <input class="form-check-input " type="checkbox" checked="true" name="{{ $input['name'] }}" id="{{ $key }}" value="1" >
+                                    </div>
+                                </div>
+                                @endif
                             <div class="form-group">
+
+
                                 {{-- show image --}}
                                 @if ($input['name'] == 'image')
                                     <span>
@@ -46,7 +58,7 @@
                                 {{--show any other thing --}}
                                 @else
                                     {{-- normal input --}}
-                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea']) and !$input['isButton'])
+                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea','checkbox']) and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         @if (str_contains($input['name'], '_ar'))
                                             @php

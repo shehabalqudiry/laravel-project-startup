@@ -48,81 +48,14 @@
                             @foreach ($options['columns'] as $columnKey => $column)
                                 <td>{!! $item->{$columnKey} !!}</td>
                             @endforeach
-
-                            <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
-                            </x-button>
-                            <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
-                                :options="$options">Delete
-                            </x-button-delete>
+                            <td>
+                                <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
+                                </x-button>
+                                <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
+                                    :options="$options">Delete
+                                </x-button-delete>
+                            </td>
                         </tr>
-
-
-                        @foreach ($options['actions'] as $actionKey => $action)
-                            {{-- Edit Modal --}}
-                            @if ($actionKey === 'edit')
-                                <div class="modal fade" id="modal-edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <form action="{{ route($action['action_route'], $item->id) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT') {{-- Use PUT for updates --}}
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">{{ __('Edit User') }}</h5>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @foreach ($options['modalInputsUpdate'][0]['data'] as $input)
-                                                        <div class="form-group">
-                                                            @if (!$input['isButton'])
-                                                                <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
-                                                                <input type="{{ $input['type'] }}" class="form-control"
-                                                                    name="{{ $input['name'] }}" id="{{ $input['name'] }}"
-                                                                    value="{{ old($input['name'], $item->{$input['name']} ?? '') }}">
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                                                    <button type="submit" class="btn btn-outline-success">{{ __('Update User') }}</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-
-                            {{-- Delete Modal --}}
-                            @if ($actionKey === 'delete')
-                                <div class="modal fade" id="modal-delete-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <form action="{{ route($action['action_route'], $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE') {{-- Use DELETE for deletion --}}
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">{{ __('Delete User') }}</h5>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>{{ __('Are you sure you want to delete this item?') }}</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                                                    <button type="submit" class="btn btn-outline-danger">{{ __('Delete') }}</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
 
 
                     @endforeach

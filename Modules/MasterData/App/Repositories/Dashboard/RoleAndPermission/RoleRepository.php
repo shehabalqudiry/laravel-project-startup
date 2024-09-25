@@ -33,11 +33,12 @@ class RoleRepository implements RoleInterface
     public function store($request)
     {
         try {
-            $role = $this->model->create($request->validated());
+            $data = $request->validated();
+            $data['name'] = str_replace(' ', '_',strtolower($data['display_name']));
+            $role = $this->model->create($data);
 
-            if ($request->permission_ids) {
-                $permissions = Permission::whereIn('id', $request->permission_ids)->pluck('name');
-                $role->syncPermissions($permissions);
+            if ($request->permissions) {
+                $role->syncPermissions($request->permissions);
             }
 
             return [
@@ -63,12 +64,13 @@ class RoleRepository implements RoleInterface
     public function update($role, $request)
     {
         try {
+            $data = $request->validated();
+            $data['name'] = str_replace(' ', '_',strtolower($data['display_name']));
 
-            $role->update($request->validated());
+            $role->update($data);
 
-            if ($request->permission_ids) {
-                $permissions = Permission::whereIn('id', $request->permission_ids)->pluck('name');
-                $role->syncPermissions($permissions);
+            if ($request->permissions) {
+                $role->syncPermissions($request->permissions);
             }
 
 

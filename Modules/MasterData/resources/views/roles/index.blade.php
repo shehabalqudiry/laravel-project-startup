@@ -47,19 +47,8 @@
                             @foreach ($options['columns'] as $columnKey => $column)
                                 <td>{{ $item->{$columnKey} }}</td>
                             @endforeach
-
-                            {{--  @if ($options['actions'] != [])
-                                <td>
-                                    @foreach ($options['actions'] as $actionKey => $action)
-                                        <x-table-action-button-component :b_text="$action['label']" :b_class="$action['class']"
-                                            :b_href="$action['href']" :modal_id="'modal-' . $actionKey . '-' . $item->id" :options="$options" :action="'action=' . route($options['deleteRoute'], $item->id)"
-                                            :item="$item" :columns="$options['columns']"></x-table-action-button-component>
-                                    @endforeach
-                                </td>
-                            @endif  --}}
                             <td>
-                                <x-button class="d-inline" :item="$item" :action="'action=' . route($options['updateRoute'], $item->id)" :options="$options">Edit
-                                </x-button>
+                                <a class="btn btn-outline-primary d-inline" href="{{ route('roles.edit', $item->id) }}">Edit</a>
                                 <x-button-delete class="d-inline" :item="$item" :action="'action=' . route($options['deleteRoute'], $item->id)"
                                     :options="$options">Delete
                                 </x-button-delete>
@@ -103,11 +92,11 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr style="">
-                                                <th>الجدول</th>
-                                                <th style="width: 56px;">اضافة</th>
-                                                <th style="width: 56px;">عرض</th>
-                                                <th style="width: 56px;">تعديل</th>
-                                                <th style="width: 56px;">حذف</th>
+                                                <th>Module</th>
+                                                <th style="width: 56px;">Create</th>
+                                                <th style="width: 56px;">Show</th>
+                                                <th style="width: 56px;">Edit</th>
+                                                <th style="width: 56px;">Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,7 +117,7 @@
                                                         <td style="width: 56px;">
 
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
+                                                                <input class="form-check-input create" type="checkbox"
                                                                     id="{{ 'create-' . $permission->module }}"
                                                                     value="{{ 'create-' . $permission->module }}"
                                                                     @if (isset($role) && $role->hasPermissionTo('create-' . $permission->module)) checked @endif
@@ -143,7 +132,7 @@
                                                         <td style="width: 56px;">
 
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
+                                                                <input class="form-check-input read" type="checkbox"
                                                                     id="{{ 'read-' . $permission->module }}"
                                                                     value="{{ 'read-' . $permission->module }}"
                                                                     @if (isset($role) && $role->hasPermissionTo('read-' . $permission->module)) checked @endif
@@ -158,7 +147,7 @@
                                                         <td style="width: 56px;">
 
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" id="flexSwitchCheckChecked"
+                                                                <input class="form-check-input update" id="flexSwitchCheckChecked"
                                                                     type="checkbox"
                                                                     id="{{ 'update-' . $permission->module }}"
                                                                     value="{{ 'update-' . $permission->module }}"
@@ -174,7 +163,7 @@
                                                         <td style="width: 56px;">
 
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
+                                                                <input class="form-check-input delete" type="checkbox"
                                                                     id="{{ 'delete-' . $permission->module }}"
                                                                     value="{{ 'delete-' . $permission->module }}"
                                                                     @if (isset($role) && $role->hasPermissionTo('delete-' . $permission->module)) checked @endif
@@ -201,6 +190,7 @@
                                         @endif
                                     @endforeach
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>

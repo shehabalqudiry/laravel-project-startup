@@ -1,9 +1,5 @@
 @php
-use Spatie\Permission\Models\Role;
     $user = auth('web')->user();
-    //$user = User::find($auth->id);
-    // dd($user);
-    //dd($user->roles, $user->permissions);
 
     $menu = \Hexadog\MenusManager\Facades\Menus::get('main');
     $menu->url(url('/'), __('Home'))->icon('bi bi-house-door-fill fe-16');

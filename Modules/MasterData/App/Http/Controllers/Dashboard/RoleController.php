@@ -42,16 +42,6 @@ class RoleController extends Controller
                 "data" => [
                     [
                         "tagtype" => "input",
-                        "label" => "Name",
-                        "type" => "text",
-                        "required" => "required",
-                        "isButton" => false,
-                        "name" => "name",
-                        "value" => "old('name')",
-                    ],
-
-                    [
-                        "tagtype" => "input",
                         "label" => "Display Name",
                         "type" => "text",
                         "required" => "required",
@@ -78,15 +68,6 @@ class RoleController extends Controller
                 "route" => 'roles.update',
                 "relation" => "colorproduct",
                 "data" => [
-                    [
-                        "tagtype" => "input",
-                        "label" => "Name",
-                        "type" => "text",
-                        "isButton" => false,
-                        "name" => "name",
-                        "value" => "old('name')",
-                    ],
-
                     [
                         "tagtype" => "input",
                         "label" => "Display Name",
@@ -126,6 +107,23 @@ class RoleController extends Controller
             'modaldelete' => $modaldelete
         ];
         return responseSuccess($data, options: $options);
+    }
+    public function edit(Role $role)
+    {
+        $permissions = Permission::groupBy(
+            'module',
+        )->get();
+
+
+        $options = [
+            'isView' => true,
+            'view' => 'masterdata::roles.edit',
+            'permissions' => $permissions,
+            'role' => $role,
+            'updateRoute' => 'roles.update',
+            'page_title' => __('Create New Role'),
+        ];
+        return responseSuccess([], options: $options);
     }
 
 

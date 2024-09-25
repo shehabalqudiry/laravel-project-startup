@@ -49,7 +49,7 @@ class SettingRepository implements SettingInterface
             // "delete" => ["label" => "Delete", "class" => 'btn btn-outline-danger', "href" => "#", "action_route" => 'activitylog.destroy'],
         ];
         $headerButtons = [
-            // "add" => "<button type='button' class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#AddModal'>Add</button>",
+            // "add" => "<button type='button' class='btn btn-outline-primary' data-toggle='modal' data-target='#AddModal'>Add</button>",
         ];
 
 
@@ -62,39 +62,25 @@ class SettingRepository implements SettingInterface
             'page_title' => __('Settings'),
             'headerButtons'   => $headerButtons,
         ];
-        return responseSuccess($data, __('Settings'), options: $options);
+        return responseSuccess($grouped_setting_data, options: $options);
     }
-    public function update($setting, $request)
+    public function update($request)
     {
         try {
-            // return $setting;
-            $setting->update($request->validated());
-            if ($setting->value && $setting->type == 'file') {
-                $file = $request->file('value');
-                $filename = $file->getClientOriginalName();
-                $path = '/uploads/settings/';
-                $file->move($path, $filename);
-                $setting->update(['value' => $path . $filename]);
-            }
-
-
-
-            return back()->with('success', "Setting Updated Successfully");
-        } catch (\Exception $e) {
-            return back()->with('fail', "Error : " . $e->getMessage());
-        }
-    }
-    public function destroy($setting)
-    {
-        try {
-            // return $setting;
-            $setting->update($request->validated());
-            if ($setting->value && $setting->type == 'file') {
-                $file = $request->file('value');
-                $filename = $file->getClientOriginalName();
-                $path = '/uploads/settings/';
-                $file->move($path, $filename);
-                $setting->update(['value' => $path . $filename]);
+            $data = $request->except(['_token']);
+            foreach ($data as $key => $value) {
+                $setting = $this->model->where('key', $key)->first();
+                if (!$setting) {
+                    return back()->with('fail', "Setting not found with key: $key");
+                }
+                if ($setting->value && $setting->type == 'file') {
+                    $file = $request->file('value');
+                    $filename = $file->getClientOriginalName();
+                    $path = '/uploads/settings/';
+                    $file->move($path, $filename);
+                    $setting->update(['value' => $path . $filename]);
+                }
+                $setting->update(['value' => $value]);
             }
 
 

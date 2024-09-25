@@ -7,9 +7,9 @@ interface SettingInterface
 
     public function index($request);
 
-    public function update($setting , $request);
+    public function update($request);
 
-    public function destroy($setting);
+    // public function destroy($setting);
 
 
 }

@@ -17,3 +17,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+*.zip
+*.postman_collection.json
+*.pub
+*.sql
+*.xlsx

@@ -44,69 +44,50 @@ class UserRepository implements UserInterface
             "add" => "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#AddModal'>Add</button>",
         ];
 
+        $translatableFields = $this->model->getTranslatableFields();
+        $translatableInputs=[];
+        foreach ($translatableFields as $field) {
+            foreach (config('myConfig.langs') as $lang) {
+                $translatableInputs[]=[
+                    "tagtype" => "input",
+                    "label" => __(ucfirst($field)) . " (" . $lang . ")",
+                    "type" => "text",
+                    "required" => "required",
+                    "placeholder" => __("Please Enter " . ucfirst($field)) . " (" . $lang . ")",
+                    "isButton" => false,
+                    "name" => "{$field}_{$lang}", // Use field name with language suffix
+                    "value" => "old('{$field}_{$lang}')",
+                ];
+            }
+        };
+        // Get non-translatable fields
+        $nonTranslatableFields = $this->model->getNonTranslatableFields();
+
+        // Generate non-translatable inputs
+        $nonTranslatableInputs = [];
+        foreach ($nonTranslatableFields as $fieldConfig) {
+            $nonTranslatableInputs[] = $fieldConfig; // Append the field configuration directly
+        }
+
+        // Merge both translatable and non-translatable inputs into modal configuration
         $modalInputs = [
             [
                 "modalId" => "AddModal",
                 "modalName" => "AddModal",
                 "formOptions" => "action=" . route('user.store') . " method=POST enctype=multipart/form-data",
-                "data" => [
-                    [
-                        "tagtype" => "input",
-                        "label" => __("Name"),
-                        "type" => "text",
-                        "required" => "required",
-                        "placeholder" => __("Please Enter Name"),
-                        "isButton" => false,
-                        "name" => "name",
-                        "value" => "old('name')",
-                    ],
-
-                    [
-                        "tagtype" => "input",
-                        "label" => __("Email"),
-                        "type" => "email",
-                        "required" => "required",
-                        "placeholder" => __("Please Enter Email"),
-                        "isButton" => false,
-                        "name" => "email",
-                        "value" => "old('email')",
-                    ],
-
-                    [
-                        "tagtype" => "checkbox",
-                        "label" => __("Status"),
-                        "type" => "checkbox",
-                        "additional_class"=>"form-check-input",
-                        "required" => "",
-                        "placeholder" => __("Please Enter Email"),
-                        "isButton" => false,
-                        "name" => "status",
-                        "value" => "old('status')",
-                    ],
-
-
-                    [
-                        "tagtype" => "input",
-                        "label" => __("Password"),
-                        "type" => "password",
-                        "required" => "required",
-                        "placeholder" => __("Please Enter Password"),
-                        "isButton" => false,
-                        "name" => "password",
-                        "value" => "old('password')",
-                    ],
-
+                "data" => array_merge($translatableInputs, $nonTranslatableInputs, [
                     [
                         "tagtype" => "button",
                         "label" => "Add New",
                         "type" => "submit",
                         "isButton" => true,
-                        "name" => "name",
-                        "value" => "old('name')",
+                        "name" => "submit",
+                        "value" => "Add New",
                     ],
-                ]
-            ]
+                ]),
+            ],
         ];
+
         $modalInputsUpdate = [
             [
                 "modalId" => "UpdateModal",

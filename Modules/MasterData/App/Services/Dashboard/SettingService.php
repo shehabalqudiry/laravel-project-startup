@@ -15,14 +15,14 @@ class SettingService
         return $this->setting_interface->index($data);
     }
 
-    public function update($data, $id)
+    public function update($request)
     {
-        return $this->setting_interface->update($data, $id);
+        return $this->setting_interface->update($request);
     }
 
-    public function destroy($id)
-    {
-        return $this->setting_interface->destroy($id);
-    }
+    // public function destroy($id)
+    // {
+    //     return $this->setting_interface->destroy($id);
+    // }
 
 }

@@ -34,6 +34,7 @@ Route::group(['middleware' => 'theme:default'], function () {
     Route::resource('activitylog', ActivityLogController::class)->names('activitylog');
     Route::resource('additionaldata', AdditionalDataController::class)->names('additionaldata');
     Route::resource('customfield', CustomFieldController::class)->names('customfield');
+    Route::post('setting/updateSetting', [SettingController::class, 'update'])->name('setting.updateSetting');
     Route::resource('setting', SettingController::class)->names('setting');
 
     // zone config

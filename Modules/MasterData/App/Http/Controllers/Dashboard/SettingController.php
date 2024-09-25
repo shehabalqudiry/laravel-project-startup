@@ -25,16 +25,8 @@ class SettingController extends Controller
         return $this->setting->index($request);
     }
 
-    public function update(Setting $setting, UpdateRequest $request)
+    public function update(Request $request)
     {
-        return $this->setting->update($setting, $request);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Setting $setting)
-    {
-        return $this->setting->destroy($setting);
+        return $this->setting->update($request);
     }
 }

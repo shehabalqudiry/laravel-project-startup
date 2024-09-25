@@ -58,7 +58,7 @@
                                 {{--show any other thing --}}
                                 @else
                                     {{-- normal input --}}
-                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea','checkbox']) and !$input['isButton'])
+                                    @if (!in_array($input['tagtype'], ['multiple', 'select', 'textarea']) and !$input['isButton'])
                                         <label for="{{ $input['name'] }}">{{ $input['label'] }}</label>
                                         @if (str_contains($input['name'], '_ar'))
                                             @php

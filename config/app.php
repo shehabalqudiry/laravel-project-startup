@@ -124,4 +124,13 @@ return [
     ],
 
     'fcm_server_key' => env('FCM_SERVER_KEY'),
+
+    // 'menus' => [
+    //     [
+    //         'heading' => 'Main',
+    //         'items' => [
+                
+    //         ],
+    //     ]
+    // ],
 ];

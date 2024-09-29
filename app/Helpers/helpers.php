@@ -1,25 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Foundation\Application as FoundationApplication;
+use Illuminate\Http\JsonResponse;
 
 // TODO: Handling api responses
-function responseSuccess($data, $key = 'data', $msg = null, $status_code = 200)
+function responseSuccess($data, $key = 'data', $msg = null, $status_code = 200, $options = ['isView' => false, 'view' => null])
 {
+    // return if view
+    if ($options['isView']) {
+        return view($options['view'], compact('data', 'options'));
+    }
+
     $returnData = [
-        'status' => true,
-        'message' => $msg,
-        $key => $data->items(),
+        'status'    => true,
+        'message'   => is_array($msg) ? $msg[0] : $msg,
+        $key        => $data instanceof LengthAwarePaginator ? $data->items() : $data,
     ];
 
-    if (isset($data->resource)) {
-        $returnData['links'] = $data->response()->getData(true)['links'];
-        $returnData['meta'] = $data->response()->getData(true)['meta'];
+    if ($data instanceof LengthAwarePaginator and !($data instanceof Illuminate\Database\Eloquent\Collection)) {
+        $returnData['paginate'] = [
+            'total' => $data->total(),
+            'current_page' => $data->currentPage(),
+            'per_page' => $data->perPage(),
+            'last_page' => $data->lastPage(),
+            'total_pages' => $data->lastPage(),
+        ];
     }
 
     return response()->json($returnData, $status_code);
 }
 
-function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 200)
+function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 400)
 {
     $returnData = [
         'status'    => false,
@@ -34,17 +50,17 @@ function responseError($msg = "Error", $errorNum = "DATAE0", $status_code = 200)
 
 
 // TODO: Handling uploade files
-function uploadFile($file, $path)
+function uploadFile($file, $path): string
 {
     $file_name = time() . '_' . $file->getClientOriginalName();
-    $file->move($path, $file_name);
+    $file->move(public_path($path), $file_name);
 
-    return $file_name;
+    return "$path/$file_name";
 }
 /* *************** end handling upload files *************** */
 
 // TODO: Handling users operations
-function notify_user(array $options = [])
+function notify_user(array $options = []): void
 {
     $options = array_merge([
         'content' => [$options['message'] ?? ""],
@@ -64,6 +80,7 @@ function notify_user(array $options = [])
                 'image' => $options['image']
             ])
         );
+        sendNotification($user->fcmTokens()->pluck('token')->toArray(), __('New Notification'), $options['content']);
     }
 }
 

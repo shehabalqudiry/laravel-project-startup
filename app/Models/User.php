@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status'
     ];
 
     /**
@@ -44,5 +47,28 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function fcmTokens()
+    {
+        return $this->hasMany(FCMToken::class, 'user_id');
+    }
+
+
+    public function getStatusColoredAttribute()
+    {
+        if (isset($this->attributes['status'])) {
+            switch ($this->attributes['status']) {
+                case 0:
+                    return '<span class="badge bg-warning"> deactive </span>';
+                case 1:
+                    return '<span class="badge bg-success"> active </span>';
+                case 2:
+                    return '<span class="badge bg-danger"> blocked </span>';
+
+                default:
+                    return '<span class="badge bg-info"> pending </span>';
+            }
+        }
     }
 }

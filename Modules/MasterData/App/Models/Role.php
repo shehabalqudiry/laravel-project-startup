@@ -1,0 +1,34 @@
+<?php
+
+namespace Modules\MasterData\App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
+use Laravel\Scout\Searchable;
+use Spatie\Permission\Models\Role as MasterRole;
+use App\Traits\ActivityLogTrait;
+
+class Role extends MasterRole
+{
+    use HasFactory ,HasTranslations;
+
+    use ActivityLogTrait;
+
+
+    protected $guarded = ['id'];
+    public $translatable = ['display_name'];
+
+
+    public function getAttribute($key)
+    {
+        if( in_array($key , $this->translatable)){
+            $language = request()->header('Accept-Language', 'en'); // Default to English if Accept-Language header is not provided
+            return $this->getTranslation($key, $language) ?? parent::getAttribute($key);
+        }else{
+            return parent::getAttribute($key);
+        }
+    }
+
+
+}

@@ -13,6 +13,7 @@ class UserRepository implements UserRepositoryInterface
         return QueryBuilder::for(User::class)
             ->allowedFilters(['name', 'email'])
             ->allowedSorts(['name']);
+
     }
 
     public function create(array $data)

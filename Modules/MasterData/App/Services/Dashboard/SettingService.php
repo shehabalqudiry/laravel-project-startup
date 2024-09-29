@@ -1,0 +1,28 @@
+<?php
+
+namespace Modules\MasterData\App\Services\Dashboard;
+
+use Modules\MasterData\App\Repositories\Dashboard\Setting\SettingInterface;
+
+class SettingService
+{
+    public function __construct(protected SettingInterface $setting_interface)
+    {
+    }
+
+    public function index($data)
+    {
+        return $this->setting_interface->index($data);
+    }
+
+    public function update($request)
+    {
+        return $this->setting_interface->update($request);
+    }
+
+    // public function destroy($id)
+    // {
+    //     return $this->setting_interface->destroy($id);
+    // }
+
+}
